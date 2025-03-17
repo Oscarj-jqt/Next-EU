@@ -1,0 +1,49 @@
+services:
+
+  mysql:
+    image: mysql:8.0.35
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'eu-talent'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    volumes:
+      - mysql_db_data:/var/lib/mysql
+    networks:
+      - backend_network
+
+  backend:
+    build:
+      context: ../
+      dockerfile: docker/backend.Dockerfile
+    container_name: backend
+    volumes:
+      - ./assets:/app/DataDomain/assets
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - backend_network
+
+  frontend:
+    build:
+      context: ../
+      dockerfile: docker/frontend.Dockerfile
+    container_name: frontend
+    volumes:
+      - ./assets:/usr/share/nginx/html/assets
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
+
+volumes:
+  mysql_db_data: {}
