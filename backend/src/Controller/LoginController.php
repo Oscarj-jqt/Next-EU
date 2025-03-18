@@ -4,12 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
 
 class LoginController extends AbstractController
 {
@@ -20,8 +19,8 @@ class LoginController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-
-    public function login(Request $request, UserPasswordHasherInterface $passwordEncoder): JsonResponse
+    #[Route('/login', name: 'user_login', methods: ['POST'])]
+    public function login(Request $request, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $username = $data['username'] ?? null;
@@ -41,14 +40,15 @@ class LoginController extends AbstractController
         }
 
         // Verify password
-        if (!$passwordEncoder->isPasswordValid($user, $password)) {
-            return new JsonResponse(['message' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
+        if (!$passwordHasher->isPasswordValid($user, $password)) {
+            return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
 
         return new JsonResponse([
-            'message' => 'Login successful'
-        ]);
+            'message' => 'Login successful',
+            'username' => $user->getUsername(),
+        ], JsonResponse::HTTP_OK);
     }
 }
 
