@@ -153,4 +153,41 @@ class Video
 
         return $this;
     }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSavedByUsers(): Collection
+    {
+        return $this->savedByUsers;
+    }
+
+    public function setSavedByUsers(Collection $savedByUsers): self
+    {
+        $this->savedByUsers = $savedByUsers;
+
+        return $this;
+    }
+
+    public function getRatedByUsers(): Collection
+    {
+        return $this->ratedByUsers;
+    }
+
+    public function setRatedByUsers(Collection $ratedByUsers): self
+    {
+        $this->ratedByUsers = $ratedByUsers;
+
+        return $this;
+    }
+
 }
