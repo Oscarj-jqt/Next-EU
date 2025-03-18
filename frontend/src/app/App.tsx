@@ -1,20 +1,12 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "./page/Login";
-import Home from "./page/Home"; 
-import Layout from "./layout";
+// src/app/_app.tsx
 
-const App: React.FC = () => {
+import React from 'react';
+import Layout from './layout';  // Assurez-vous d'avoir le bon chemin vers ton layout
+
+export default function App({ Component, pageProps }: { Component: React.ComponentType; pageProps: any }) {
   return (
-    <Router>
-      <Routes>
-         <Route path="/" element={<Layout />}>
-         <Route index element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
   );
-};
-
-export default App;
+}
