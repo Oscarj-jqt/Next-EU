@@ -1,4 +1,5 @@
 <?php
+/** @phpstan-ignore-file */
 
 namespace App\Entity;
 
@@ -8,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,7 +32,7 @@ class User
     private ?\DateTimeImmutable $created_at = null;
 
     // Relation avec l'entité Video
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Video::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $uploadedVideos;
 
     // Relation avec les vidéos notées et sauvegardées

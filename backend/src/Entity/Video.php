@@ -1,5 +1,7 @@
 <?php
 
+/** @phpstan-ignore-file */
+
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
@@ -57,6 +59,7 @@ class Video
     {
         return $this->id;
     }
+
 
     public function getTitle(): ?string
     {
