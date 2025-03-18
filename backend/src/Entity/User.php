@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,16 +30,23 @@ class User
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    # Relation with Video entity
-    #[ORM\OneToMany(mappedBy: "user", targetEntity: Video::class, orphanRemoval: true)]
+    // Relation avec l'entité Video
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, orphanRemoval: true)]
     private Collection $uploadedVideos;
 
-    # Relation with rating and saving videos
-    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: "savedByUsers")]
+    // Relation avec les vidéos notées et sauvegardées
+    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'savedByUsers')]
     private Collection $savedVideos;
 
-    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: "ratedByUsers")]
+    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'ratedByUsers')]
     private Collection $ratedVideos;
+
+    public function __construct()
+    {
+        $this->uploadedVideos = new ArrayCollection();
+        $this->savedVideos = new ArrayCollection();
+        $this->ratedVideos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,6 +110,39 @@ class User
     {
         $this->created_at = $created_at;
 
+        return $this;
+    }
+
+    public function getUploadedVideos(): Collection
+    {
+        return $this->uploadedVideos;
+    }
+
+    public function setUploadedVideos(Collection $uploadedVideos): self
+    {
+        $this->uploadedVideos = $uploadedVideos;
+        return $this;
+    }
+
+    public function getSavedVideos(): Collection
+    {
+        return $this->savedVideos;
+    }
+
+    public function setSavedVideos(Collection $savedVideos): self
+    {
+        $this->savedVideos = $savedVideos;
+        return $this;
+    }
+
+    public function getRatedVideos(): Collection
+    {
+        return $this->ratedVideos;
+    }
+
+    public function setRatedVideos(Collection $ratedVideos): self
+    {
+        $this->ratedVideos = $ratedVideos;
         return $this;
     }
 }

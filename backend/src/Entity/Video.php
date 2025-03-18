@@ -39,18 +39,18 @@ class Video
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-    # Relation with User entity
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "uploadedVideos")]
+    // Relation with User entity
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploadedVideos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    # Relation with ratings and saving videos
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: "savedVideos")]
-    #[ORM\JoinTable(name: "video_saved")]
+    // Relation with ratings and saving videos
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'savedVideos')]
+    #[ORM\JoinTable(name: 'video_saved')]
     private Collection $savedByUsers;
 
-    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: "ratedVideos")]
-    #[ORM\JoinTable(name: "video_ratings")]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'ratedVideos')]
+    #[ORM\JoinTable(name: 'video_ratings')]
     private Collection $ratedByUsers;
 
     public function getId(): ?int
