@@ -33,11 +33,24 @@
 
 ### Videos
 
+<<<<<<< HEAD
 - id
 - title
 - description
 - url (cdn)
 - thumbnail
+=======
+(cdn)
+
+- id
+- title
+- description
+- thumbnail
+- views
+- country
+- category
+- google maps url
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a
 - created_at
 
 ### Rel uploaded_videos
@@ -49,4 +62,14 @@
 ### Rel ratings
 
 - user_id
+<<<<<<< HEAD
+=======
+- type
+- created_at
+
+### Rel saved_videos
+
+- user_id
+- video_id
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a
 - created_at

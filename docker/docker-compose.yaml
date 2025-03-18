@@ -1,7 +1,12 @@
 services:
 
+<<<<<<< HEAD
   mysql:
     image: mysql:8.0.35
+=======
+  database:
+    image: mysql:8.4.4
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a
     container_name: mysql
     restart: always
     environment:
@@ -9,8 +14,14 @@ services:
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
+<<<<<<< HEAD
     volumes:
       - mysql_db_data:/var/lib/mysql
+=======
+      TZ: Europe/Berlin
+    volumes:
+      - db_data:/var/lib/mysql
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a
     networks:
       - backend_network
 
@@ -21,6 +32,7 @@ services:
     container_name: backend
     volumes:
       - ./assets:/app/DataDomain/assets
+<<<<<<< HEAD
     ports:
       - "8080:8080"
     depends_on:
@@ -40,10 +52,37 @@ services:
       - "443:443"
     networks:
       - backend_network
+=======
+      - ../backend:/var/www/html
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - backend_network
+
+#  frontend:
+#    build:
+#      context: ../
+#      dockerfile: docker/frontend.Dockerfile
+#    container_name: frontend
+#    volumes:
+#      - ./assets:/usr/share/nginx/html/assets
+#      - ../frontend:/usr/share/nginx/html
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    networks:
+#      - backend_network
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a
 
 networks:
   backend_network:
     driver: bridge
 
 volumes:
+<<<<<<< HEAD
   mysql_db_data: {}
+=======
+  db_data: {}
+>>>>>>> 2a656a9def2a383446301c71eb506ac7e047f90a

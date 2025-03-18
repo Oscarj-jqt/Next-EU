@@ -1,0 +1,7 @@
+vendor/
+./composer.json
+./composer.lock
+node_modules/
+./package.json
+./package.lock
+.idea
