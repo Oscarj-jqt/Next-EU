@@ -33,11 +33,16 @@
 
 ### Videos
 
+(cdn)
+
 - id
 - title
 - description
-- url (cdn)
 - thumbnail
+- views
+- country
+- category
+- google maps url
 - created_at
 
 ### Rel uploaded_videos
@@ -49,4 +54,11 @@
 ### Rel ratings
 
 - user_id
+- type
+- created_at
+
+### Rel saved_videos
+
+- user_id
+- video_id
 - created_at
