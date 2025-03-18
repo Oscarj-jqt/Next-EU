@@ -7,10 +7,10 @@ export default function Login() {
         <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Login</h1>
         
         <form className="flex flex-col">
-          <label className="mb-1 text-gray-600 font-medium">Email</label>
+          <label className="mb-1 text-gray-600 font-medium">Username</label>
           <input 
-            type="email" 
-            placeholder="example@test.com"
+            type="text" 
+            placeholder="Username"
             className="mb-4 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-black "
           />
 
