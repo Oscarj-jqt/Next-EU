@@ -10,7 +10,7 @@ export default function Register() {
                 rel="stylesheet" 
             />
 
-            <section style={{ fontFamily: "Montserrat" }} className="bg-[#b6f3ff] flex font-medium items-center justify-center h-screen">
+            <section style={{ fontFamily: "Montserrat" }} className="bg-[#b6f3ff] flex font-medium items-center justify-center h-screen w-[393px]">
                 <section className="w-64 mx-auto bg-[#ffffff] rounded-2xl px-8 py-6 shadow-lg">
                     <div className="flex items-center justify-between">
                         <span className="text-gray-400 text-sm">2d ago</span>

@@ -1,11 +1,10 @@
 "use client";
 
-import { Link } from 'react-router-dom';
 import { MagnifyingGlassIcon, UserIcon } from "@heroicons/react/24/outline";
 
 const Header = () => {
   return (
-    <nav className="w-[393px] bg-[#b6f3ff] p-4 flex justify-between items-center rounded-md">
+    <nav className="w-[393px] bg-[#b6f3ff] p-4 flex justify-between items-center">
      
       <h1 className="text-lg text-white font-bold">EU-TALENT</h1> 
 
@@ -17,10 +16,7 @@ const Header = () => {
           placeholder="Countries..."
         />
       </div>
-
-      <Link to="/login">
-        <UserIcon className="h-6 w-6 text-gray-600" />
-      </Link>
+        <a href="/login"><UserIcon className="h-6 w-6 text-gray-600" /></a>
     </nav>
   );
 };

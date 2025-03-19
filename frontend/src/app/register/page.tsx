@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Register() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#b6f3ff]">
+    <div className="min-h-screen flex items-center justify-center bg-[#b6f3ff] w-[393px]">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
         <h1 className="text-2xl font-bold text-center text-gray-700 mb-6">Register</h1>
         

@@ -9,7 +9,7 @@ const Home: React.FC = () => {
       <Header />
 
       
-      <div className="w-[393px] h-[750px] mt-4 border border-gray-300 rounded-lg overflow-hidden">
+      <div className="w-[393px] h-[750px] overflow-hidden">
         <EuropeMap />
       </div>
     </div>
