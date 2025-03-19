@@ -1,5 +1,5 @@
 ### Get all messages of a category and country
-POST http://localhost:8080/api/get-messages
+GET http://localhost:8080/api/get-messages
 Content-Type: application/json
 
 {

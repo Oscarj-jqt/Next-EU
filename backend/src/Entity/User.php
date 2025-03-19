@@ -26,16 +26,16 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     private string $country;
 
     #[ORM\Column(length: 255)]
-    private string $profile_picture;
+    private string $profilePicture;
 
     #[ORM\Column]
-    private \DateTimeImmutable $created_at;
+    private \DateTimeImmutable $createdAt;
 
     // Relation avec l'entité Video
     /**
      * @var Collection<int, Video>
      */
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Video::class, orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Video::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $uploadedVideos;
 
     // Relation avec les vidéos notées et sauvegardées
@@ -101,24 +101,24 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
 
     public function getProfilePicture(): string
     {
-        return $this->profile_picture;
+        return $this->profilePicture;
     }
 
-    public function setProfilePicture(string $profile_picture): static
+    public function setProfilePicture(string $profilePicture): static
     {
-        $this->profile_picture = $profile_picture;
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

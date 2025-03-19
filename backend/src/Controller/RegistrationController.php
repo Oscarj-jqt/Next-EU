@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class RegistrationController extends AbstractController
 {
     // Registration method to add a new user
-    #[Route('/register', name: 'user_register', methods: ['POST'])]
+    #[Route('/api/create-user', name: 'user_register', methods: ['POST'])]
     public function register(Request $request, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
     {
         // Getting datas from client (username, password)

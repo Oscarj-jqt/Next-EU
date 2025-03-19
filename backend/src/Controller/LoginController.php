@@ -16,7 +16,7 @@ class LoginController extends AbstractController
     {
     }
 
-    #[Route('/login', name: 'user_login', methods: ['POST'])]
+    #[Route('/api/authenticate-user', name: 'user_login', methods: ['POST'])]
     public function login(Request $request, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $data = json_decode($request->getContent(), true);

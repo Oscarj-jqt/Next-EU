@@ -1,5 +1,5 @@
 ### Authenticate a user with username
-POST http://localhost:8080/login
+POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 %}
 
 ### Authenticate a user with email
-POST http://localhost:8080/login
+POST http://localhost:8080/api/login
 Content-Type: application/json
 
 {

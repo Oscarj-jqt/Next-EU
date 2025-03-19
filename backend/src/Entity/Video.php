@@ -35,10 +35,10 @@ class Video
     private string $category;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $google_maps_url = null;
+    private ?string $googleMapsUrl = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $created_at;
+    private \DateTimeImmutable $createdAt;
 
     // Relation with User entity
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploadedVideos')]
@@ -139,24 +139,24 @@ class Video
 
     public function getGoogleMapsUrl(): ?string
     {
-        return $this->google_maps_url;
+        return $this->googleMapsUrl;
     }
 
-    public function setGoogleMapsUrl(?string $google_maps_url): static
+    public function setGoogleMapsUrl(?string $googleMapsUrl): static
     {
-        $this->google_maps_url = $google_maps_url;
+        $this->googleMapsUrl = $googleMapsUrl;
 
         return $this;
     }
 
     public function getCreatedAt(): \DateTimeImmutable
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
