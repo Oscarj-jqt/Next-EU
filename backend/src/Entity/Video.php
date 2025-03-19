@@ -13,7 +13,6 @@ class Video
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    /** @phpstan-ignore-next-line **/
     private int $id;
 
     #[ORM\Column(length: 255)]
@@ -63,6 +62,13 @@ class Video
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getTitle(): string

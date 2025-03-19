@@ -13,7 +13,6 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    /** @phpstan-ignore-next-line **/
     private int $id;
 
     #[ORM\Column(length: 255)]
@@ -51,6 +50,12 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'ratedByUsers')]
     private Collection $ratedVideos;
 
+    /**
+     * @var Collection<int, QuizConnection>
+     */
+    #[ORM\OneToMany(targetEntity: QuizConnection::class, mappedBy: 'user')]
+    private Collection $answeredQuizQuestions;
+
     public function __construct()
     {
         $this->uploadedVideos = new ArrayCollection();
@@ -61,6 +66,13 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getUsername(): string
@@ -173,6 +185,24 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     public function setRatedVideos(Collection $ratedVideos): self
     {
         $this->ratedVideos = $ratedVideos;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, QuizConnection>
+     */
+    public function getAnsweredQuizQuestions(): Collection
+    {
+        return $this->answeredQuizQuestions;
+    }
+
+    /**
+     * @param Collection<int, QuizConnection> $answeredQuizQuestions
+     */
+    public function setAnsweredQuizQuestions(Collection $answeredQuizQuestions): self
+    {
+        $this->answeredQuizQuestions = $answeredQuizQuestions;
 
         return $this;
     }

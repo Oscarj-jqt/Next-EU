@@ -6,7 +6,7 @@ use App\Enum\CategoryEnum;
 use App\Enum\CountryEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class GetMessagesRequest
+readonly class GetMessagesRequest
 {
     public function __construct(
         #[Assert\NotBlank(message: 'Category is required')]

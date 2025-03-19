@@ -13,7 +13,6 @@ class Message
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    /** @phpstan-ignore-next-line **/
     private int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'createdMessages')]
@@ -35,6 +34,13 @@ class Message
     public function getId(): int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getContent(): string
@@ -83,6 +89,12 @@ class Message
         $this->createdAt = $createdAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getUser(): User
