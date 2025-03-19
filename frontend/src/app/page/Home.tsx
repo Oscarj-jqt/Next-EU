@@ -2,13 +2,10 @@
 
 import React from "react";
 import EuropeMap from "../components/EuropeMap";
-<<<<<<< HEAD
 import { useRouter } from "next/navigation";
 import Header from "../components/header"; 
-=======
-import Header from "../components/header"; // Vérifie la casse !
 import Category from "../components/Category";
->>>>>>> a1cd68ae1922c42064bac3f2c98dd5565417f37f
+
 
 const Home: React.FC = () => {
   const router = useRouter();
@@ -16,6 +13,7 @@ const Home: React.FC = () => {
     <div className="flex flex-col items-center justify-center w-full h-screen bg-black">
     
       <Header />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
       
       <div className="w-[393px] h-[750px] overflow-hidden">
@@ -24,20 +22,12 @@ const Home: React.FC = () => {
           <Category />
         </div>
       </div>
-      <button
-        onClick={() => router.push("../connecteMessage")}
-        style={{
-          width: "393px",
-          padding: "12px",
-          backgroundColor: "#007BFF",
-          color: "white",
-          fontSize: "16px",
-          fontWeight: "bold",
-          cursor: "pointer",
-          marginBottom: "20px",
-        }}
-      >
-        Accéder au Chat
+      <button 
+        onClick={() => router.push("../connecteMessage")}>
+          <div className="text-3xl">
+            <i className="fa-solid fa-comments"></i>
+          </div>
+      
       </button>
     </div>
   );
