@@ -10,21 +10,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationController extends AbstractController
 {
-
-
     // Registration method to add a new user
     #[Route('/register', name: 'user_register', methods: ['POST'])]
     public function register(Request $request, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
     {
         // Getting datas from client (username, password)
         $data = json_decode($request->getContent(), true);
-
 
         if (!isset($data['username']) || !isset($data['password'])) {
             return new JsonResponse(['error' => 'username and password are required'], JsonResponse::HTTP_BAD_REQUEST);
@@ -43,6 +40,7 @@ class RegistrationController extends AbstractController
             foreach ($violations as $violation) {
                 $errors[] = $violation->getMessage();
             }
+
             return new JsonResponse(['errors' => $errors], JsonResponse::HTTP_BAD_REQUEST);
         }
 
