@@ -1,0 +1,57 @@
+.wheelContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  z-index: 1000; /* La roue est au-dessus de la carte */
+}
+
+
+.wheel {
+  display: flex;
+  position: relative;
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.category {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: blue;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* Catégorie active en haut, plus grosse */
+.active {
+  width: 80px;
+  height: 80px;
+  font-size: 16px;
+  background-color: darkblue;
+}
+
+/* Boutons pour tourner */
+.arrowLeft, .arrowRight {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.arrowLeft:hover, .arrowRight:hover {
+  transform: scale(1.2);
+}
