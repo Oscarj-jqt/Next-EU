@@ -1,0 +1,60 @@
+name: Frontend Tests
+
+on: [push]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-docker-frontend-${{ hashFiles('docker/frontend.Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-docker-frontend-
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          driver-opts: image=moby/buildkit:latest
+
+      - name: Build frontend image with cache
+        run: |
+          docker buildx build \
+            --cache-from=type=local,src=/tmp/.buildx-cache \
+            --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
+            -f docker/frontend.Dockerfile \
+            -t frontend . --load
+
+      - name: Save frontend image
+        run: docker save -o frontend.tar frontend
+
+      - name: Upload frontend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-image
+          path: frontend.tar
+
+      - name: Run code style checks
+        run: |
+          set -x # Print commands and their arguments as they are executed
+          set -e # Exit immediately if a command exits with a non-zero status
+          set -u # Exit immediately if a variable is not defined
+
+          docker run --rm frontend npm run lint
+
+      - name: Run prettier checks
+        run: |
+          set -x # Print commands and their arguments as they are executed
+          set -e # Exit immediately if a command exits with a non-zero status
+          set -u # Exit immediately if a variable is not defined
+
+          docker run --rm frontend npm run format:check

@@ -17,32 +17,39 @@ services:
 
   backend:
     build:
-      context: ../
+      context: ./
       dockerfile: docker/backend.Dockerfile
     container_name: backend
     volumes:
-      - ./assets:/app/DataDomain/assets
-      - ../backend:/var/www/html
+      - ./docker/assets:/app/DataDomain/assets
+      - ./backend:/var/www/html
+      # Exclude
+      - /var/www/html/vendor
     ports:
       - "8080:8080"
     depends_on:
       - database
     networks:
       - backend_network
+    stdin_open: true
+    tty: true
 
-#  frontend:
-#    build:
-#      context: ../
-#      dockerfile: docker/frontend.Dockerfile
-#    container_name: frontend
-#    volumes:
-#      - ./assets:/usr/share/nginx/html/assets
-#      - ../frontend:/usr/share/nginx/html
-#    ports:
-#      - "80:80"
-#      - "443:443"
-#    networks:
-#      - backend_network
+  frontend:
+    build:
+      context: ./
+      dockerfile: docker/frontend.Dockerfile
+    container_name: frontend
+    volumes:
+      - ./docker/assets:/usr/share/nginx/html/assets
+      - ./frontend:/app
+      # Exclude
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - backend_network
+    stdin_open: true
+    tty: true
 
 networks:
   backend_network:

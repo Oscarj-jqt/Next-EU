@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -61,3 +62,10 @@ const EuropeMap = () => {
 };
 
 export default EuropeMap;
+=======
+import Home from "./page/Home";
+
+export default function Page() {
+  return <Home />;
+}
+>>>>>>> hugo

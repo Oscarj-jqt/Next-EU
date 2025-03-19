@@ -1,0 +1,74 @@
+"use client";
+
+import React from "react";
+import { MapContainer, TileLayer, GeoJSON, GeoJSONProps } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+import L, { Layer } from "leaflet";
+import europeGeoJson from "../data/europe.json"; 
+
+// Définir les limites de l'Europe
+const europeBounds: L.LatLngBoundsExpression = [
+  [71.2, -25.0], // Nord-Ouest (Islande, Norvège)
+  [34.5, 45.0], // Sud-Est (Grèce, Turquie)
+];
+
+// Définir un type spécifique pour les pays
+interface CountryFeature {
+  type: "Feature";
+  properties: { name: string };
+  geometry: {
+    type: "Polygon" | "MultiPolygon";
+    coordinates: number[][][] | number[][][][];
+  };
+}
+
+// Fonction pour styliser les pays avec un typage correct
+const onEachCountry: GeoJSONProps["onEachFeature"] = (feature, layer: Layer) => {
+  if (!feature.properties) return;
+
+  layer.setStyle({
+    fillColor: "#007BFF", // Bleu pour les pays
+    color: "#FFFFFF", // Bordure blanche
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.5,
+  });
+
+  // Ajouter un effet au survol
+  layer.on("mouseover", function () {
+    layer.setStyle({ fillOpacity: 0.8 });
+  });
+
+  layer.on("mouseout", function () {
+    layer.setStyle({ fillOpacity: 0.5 });
+  });
+
+  // Afficher le nom du pays au clic
+  layer.on("click", function () {
+    alert(`Pays sélectionné : ${feature.properties.name}`);
+  });
+};
+
+const EuropeMap: React.FC = () => {
+  return (
+    <MapContainer
+      center={[50, 10]} // Coordonnées centrées sur l'Europe
+      zoom={4}
+      scrollWheelZoom={true}
+      style={{ width: "100%", height: "100%", borderRadius: "15px" }}
+      maxBounds={europeBounds} // Limite la zone visible
+      maxBoundsViscosity={1.0} // Empêche de sortir des limites
+    >
+      {/* Fond de carte stylisé */}
+      <TileLayer
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        attribution="© OpenStreetMap, © CARTO"
+      />
+
+      {/* Couleurs des pays via GeoJSON */}
+      <GeoJSON data={europeGeoJson as GeoJSON.FeatureCollection} onEachFeature={onEachCountry} />
+    </MapContainer>
+  );
+};
+
+export default EuropeMap;

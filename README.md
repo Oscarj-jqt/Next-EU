@@ -1,7 +1,12 @@
 # EU Talents
 
+## Start container
+
+```bash
+    docker compose up -d
+```
+
 ## User Management
-- Creator/Viewer
 - Following
 - Register
 - Login
@@ -42,7 +47,6 @@
 - views
 - country
 - category
-- google maps url
 - created_at
 
 ### Rel uploaded_videos

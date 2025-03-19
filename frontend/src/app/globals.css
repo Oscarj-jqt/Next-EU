@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.leaflet-container {
+  border-radius: 15px; /* Arrondi les bords */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+}
+
+/* Effet de zoom au survol */
+.leaflet-container:hover {
+  transform: scale(1.01);
+  transition: transform 0.2s ease-in-out;
+}
