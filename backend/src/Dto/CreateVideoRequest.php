@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class CreateVideoRequest
 {
 public function __construct(
-#[Assert\NotBlank(message: 'Title is required')]
+#[Assert\NotBlank(message: 'Video title is required')]
 #[Assert\Length(
 max: 255,
 minMessage: 'Title must be at least 3 characters long',
