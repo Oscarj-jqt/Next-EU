@@ -16,13 +16,13 @@ maxMessage: 'Title cannot exceed 255 characters'
 )]
 public string $title,
 
-#[Assert\NotBlank(message: 'Description is required')]
 #[Assert\Length(
 max: 1000,
 minMessage: 'Description must be at least 10 characters long',
 maxMessage: 'Description cannot exceed 1000 characters'
 )]
-public string $description,
+#[Assert\Nullable]
+public ?string $description = null,
 
 #[Assert\NotBlank(message: 'Category is required')]
 #[Assert\Choice(choices: CategoryEnum::VALUES)]
@@ -40,9 +40,11 @@ public int $userId,
 public string $videoUrl,
 
 #[Assert\Length(max: 255)]
+#[Assert\Nullable] // Allow null value
 public ?string $thumbnail = null,
 
 #[Assert\Url(message: 'Invalid Google Maps URL')]
+#[Assert\Nullable] // Allow null value
 public ?string $googleMapsUrl = null
 ) {
 }
@@ -52,7 +54,7 @@ public function getTitle(): string
 return $this->title;
 }
 
-public function getDescription(): string
+public function getDescription(): ?string
 {
 return $this->description;
 }
