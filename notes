@@ -1,2 +1,7 @@
 add token jwt registration/login (done)
-data validation in
+
+
+
+run le docker conteneur
+docker composer up -d
+

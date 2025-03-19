@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +17,8 @@ class LoginController extends AbstractController
     }
 
     #[Route('/login', name: 'user_login', methods: ['POST'])]
-    public function login(Request $request, JWTTokenManagerInterface $JWTManager, UserPasswordHasherInterface $passwordEncoder): JsonResponse
+    public function login(Request $request, UserPasswordHasherInterface $passwordEncoder): JsonResponse
+
     {
         $data = json_decode($request->getContent(), true);
         $username = $data['username'] ?? null;
@@ -45,11 +45,9 @@ class LoginController extends AbstractController
 
         // Create the token for user
         $username = $user->getUsername();
-        $token = $JWTManager->create($user);
 
         return new JsonResponse([
             'message' => 'Logged successfully',
-            'token' => $token,
             'username' => $username,
         ], JsonResponse::HTTP_OK);
     }

@@ -3,7 +3,7 @@ info:
   title: EU Talent API
   version: 1.0.0
 paths:
-  /api/login:
+  /api/api/login:
     post:
       summary: Login user
       operationId: authenticateUser
