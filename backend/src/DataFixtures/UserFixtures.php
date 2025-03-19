@@ -2,6 +2,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
+use App\Enum\CountryEnum;
+use App\Enum\CategoryEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -25,13 +27,13 @@ public function load(ObjectManager $manager): void
         [
             'username' => 'Leander',
             'password' => '123456',
-            'country' => 'Germany',
+            'country' => CountryEnum::GERMANY->value,
             'profilePicture' => 'profile2.jpg',
         ],
         [
             'username' => 'Oscar',
             'password' => '123456',
-            'country' => 'France',
+            'country' => CountryEnum::FRANCE->value,
             'profilePicture' => 'profile1.jpg',
         ],
 
