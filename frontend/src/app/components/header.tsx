@@ -1,13 +1,27 @@
-import Link from "next/link";
+"use client";
 
-export default function Header() {
+import { MagnifyingGlassIcon, UserIcon } from "@heroicons/react/24/outline";
+
+const Header = () => {
   return (
-    <header className="bg-blue-500 text-white p-4">
-      <nav>
-        <Link href="/home" className="mr-4">Accueil</Link>
-        <Link href="/login" className="mr-4">Login</Link>
-        <Link href="/register">S'inscrire</Link>
-      </nav>
-    </header>
+    <nav className="w-[393px] bg-[#b6f3ff] p-4 flex justify-between items-center">
+      {/* Logo /}
+      <h1 className="text-lg text-white font-bold">EU-TALENT</h1> {/ Changer la couleur du texte en blanc /}
+
+      {/ Recherche /}
+      <div className="flex items-center px-2 py-1">
+        <MagnifyingGlassIcon className="h-5 w-5 text-gray-600" />
+        <input
+          className="ml-2 outline-none bg-transparent text-sm text-gray-700 placeholder-gray-500"
+          type="text"
+          placeholder="Countries..."
+        />
+      </div>
+
+      {/ Icône Profil */}
+      <UserIcon className="h-6 w-6 text-gray-600" />
+    </nav>
   );
-}
+};
+
+export default Header;
