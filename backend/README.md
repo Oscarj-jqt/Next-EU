@@ -24,3 +24,10 @@ Inside container:
 ```bash
     mysql -u root -p
 ```
+
+## Create migration
+
+Inside container:
+```bash
+    php bin/console make:migration
+```

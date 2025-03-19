@@ -1,0 +1,15 @@
+### Get all messages of a category and country
+GET http://localhost:8080/api/get-messages
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "category": "sports",
+  "country": "france"
+}
+
+> {%
+    client.test("It should return a successful status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

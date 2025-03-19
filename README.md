@@ -23,37 +23,7 @@
 - Like & Dislike
 - Sharing von Videos
 
-
-
 # DB
-
-## Users
-
-- id
-- username
-- password
-- country
-- profile_picture
-- created_at
-
-### Videos
-
-(cdn)
-
-- id
-- title
-- description
-- thumbnail
-- views
-- country
-- category
-- created_at
-
-### Rel uploaded_videos
-
-- user_id
-- video_id
-- created_at
 
 ### Rel ratings
 
@@ -61,8 +31,41 @@
 - type
 - created_at
 
-### Rel saved_videos
 
+/api/create-quiz
+country, user_hash
+=> success/failure
+
+/api/get-question
+quiz_connection_id
+=> quiz_question_data
+
+/api/validate-answer
+quiz_question_id, answer
+=> correct/wrong, (if correct) next quiz_question_id
+
+
+### QuizQuestion
+
+- id
+- question_url
+- question_content
+- country
+- wrong_answer_options
+- correct_answer_options
+- created_at
+
+### QuizQueue
+
+- id
 - user_id
-- video_id
+- search_country
+- created_at
+
+### QuizConnections
+
+- id
+- user_id
+- user_id
+- quiz_question_ids
 - created_at
