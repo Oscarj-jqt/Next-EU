@@ -1,6 +1,7 @@
 import React from "react";
 import EuropeMap from "../components/EuropeMap";
 import Header from "../components/header"; // Vérifie la casse !
+import Category from "../components/Category";
 
 const Home: React.FC = () => {
   return (
@@ -11,6 +12,9 @@ const Home: React.FC = () => {
       
       <div className="w-[393px] h-[750px] overflow-hidden">
         <EuropeMap />
+        <div className="absolute bottom-5 w-[393px] flex justify-center z-3">
+          <Category />
+        </div>
       </div>
     </div>
   );
