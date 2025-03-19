@@ -114,7 +114,9 @@ $videos = $this->entityManager
 'category' => $getVideosRequest->getCategory(),
 'country' => $getVideosRequest->getCountry(),
 ],
-['createdAt' => 'DESC']
+['createdAt' => 'DESC'],
+    // We get max 2 videos
+    2
 );
 
 // Prepare result
