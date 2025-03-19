@@ -1,0 +1,30 @@
+### Authenticate a user with username
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "Maxi",
+  "password": "123456"
+}
+
+> {%
+    client.test("It should return a successful status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+
+### Authenticate a user with email
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "Maxi@pecu.com",
+  "password": "123456"
+}
+
+> {%
+    client.test("It should return a successful status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
+

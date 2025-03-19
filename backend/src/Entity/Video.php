@@ -15,10 +15,11 @@ class Video
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    /** @phpstan-ignore-next-line **/
+    private int $id;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private string $title;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -27,41 +28,47 @@ class Video
     private ?string $thumbnail = null;
 
     #[ORM\Column]
-    private ?int $views = null;
+    private int $views = 0;
 
     #[ORM\Column(length: 100)]
-    private ?string $country = null;
+    private string $country;
 
     #[ORM\Column(length: 100)]
-    private ?string $category = null;
+    private string $category;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $google_maps_url = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    private \DateTimeImmutable $created_at;
 
     // Relation with User entity
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploadedVideos')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
+    private User $user;
 
     // Relation with ratings and saving videos
+    /**
+     * @var Collection<int, User>
+     */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'savedVideos')]
     #[ORM\JoinTable(name: 'video_saved')]
     private Collection $savedByUsers;
 
+    /**
+     * @var Collection<int, User>
+     */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'ratedVideos')]
     #[ORM\JoinTable(name: 'video_ratings')]
     private Collection $ratedByUsers;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -97,7 +104,7 @@ class Video
         return $this;
     }
 
-    public function getViews(): ?int
+    public function getViews(): int
     {
         return $this->views;
     }
@@ -109,7 +116,7 @@ class Video
         return $this;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): string
     {
         return $this->country;
     }
@@ -121,7 +128,7 @@ class Video
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getCategory(): string
     {
         return $this->category;
     }
@@ -145,7 +152,7 @@ class Video
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -157,23 +164,29 @@ class Video
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
+    /**
+     * @return Collection<int, User>
+     */
     public function getSavedByUsers(): Collection
     {
         return $this->savedByUsers;
     }
 
+    /**
+     * @param Collection<int, User> $savedByUsers
+     */
     public function setSavedByUsers(Collection $savedByUsers): self
     {
         $this->savedByUsers = $savedByUsers;
@@ -181,16 +194,21 @@ class Video
         return $this;
     }
 
+    /**
+     * @return Collection<int, User>
+     */
     public function getRatedByUsers(): Collection
     {
         return $this->ratedByUsers;
     }
 
+    /**
+     * @param Collection<int, User> $ratedByUsers
+     */
     public function setRatedByUsers(Collection $ratedByUsers): self
     {
         $this->ratedByUsers = $ratedByUsers;
 
         return $this;
     }
-
 }
