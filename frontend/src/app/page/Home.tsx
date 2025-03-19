@@ -1,17 +1,36 @@
+"use client"; 
+
 import React from "react";
 import EuropeMap from "../components/EuropeMap";
-import Header from "../components/header"; // Vérifie la casse !
+import { useRouter } from "next/navigation";
+import Header from "../components/header"; 
 
 const Home: React.FC = () => {
+  const router = useRouter();
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen bg-gray-100">
     
       <Header />
 
       
-      <div className="w-[393px] h-[750px] mt-4 border border-gray-300 rounded-lg overflow-hidden">
+      <div className="w-[393px] h-[750px] overflow-hidden">
         <EuropeMap />
       </div>
+      <button
+        onClick={() => router.push("../connecteMessage")}
+        style={{
+          width: "393px",
+          padding: "12px",
+          backgroundColor: "#007BFF",
+          color: "white",
+          fontSize: "16px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          marginBottom: "20px",
+        }}
+      >
+        Accéder au Chat
+      </button>
     </div>
   );
 };
