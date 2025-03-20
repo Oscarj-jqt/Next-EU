@@ -4,7 +4,7 @@ namespace App\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateVideoRequest
+readonly class CreateVideoRequest
 {
     public function __construct(
         #[Assert\NotBlank(message: 'User ID is required')]
