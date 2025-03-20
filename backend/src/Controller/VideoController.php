@@ -25,14 +25,8 @@ class VideoController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         $createVideoRequest = new CreateVideoRequest(
-            title: $data['title'],
-            category: $data['category'],
-            country: $data['country'],
             userId: $data['userId'],
             videoUrl: $data['videoUrl'],
-            description: $data['description'],
-            thumbnail: $data['thumbnail'] ?? null,
-            googleMapsUrl: $data['googleMapsUrl'] ?? null
         );
 
         // Validation
@@ -58,14 +52,8 @@ class VideoController extends AbstractController
 
         // Create Video entity
         $video = new Video();
-        $video->setTitle($createVideoRequest->getTitle());
-        $video->setDescription($createVideoRequest->getDescription());
-        $video->setCategory($createVideoRequest->getCategory()->value);
-        $video->setCountry($createVideoRequest->getCountry()->value);
         $video->setUser($user);
         $video->setVideoUrl($createVideoRequest->getVideoUrl());
-        $video->setThumbnail($createVideoRequest->getThumbnail());
-        $video->setGoogleMapsUrl($createVideoRequest->getGoogleMapsUrl());
         $video->setCreatedAt(new \DateTimeImmutable());
 
         // Persist to the database
@@ -83,14 +71,11 @@ class VideoController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $getVideosRequest = new GetVideosRequest(
-            category: $data['category'],
+        $createVideoRequest = new GetVideosRequest(
             country: $data['country'],
-            userId: $data['userId']
         );
 
-        // Validation
-        $violations = $validator->validate($getVideosRequest);
+        $violations = $validator->validate($createVideoRequest);
         if (count($violations) > 0) {
             return new JsonResponse(
                 data: ['errors' => (string) $violations],
@@ -98,40 +83,50 @@ class VideoController extends AbstractController
             );
         }
 
-        // Retrieve user
-        $user = null;
-        if ($getVideosRequest->getUserId()) {
-            $user = $this->entityManager
+        $userId = 1;
+
+        $user = $this->entityManager
             ->getRepository(User::class)
-            ->find($getVideosRequest->getUserId());
+            ->find($userId);
+
+        if (!$user) {
+            return new JsonResponse(
+                data: ['message' => 'User not found'],
+                status: JsonResponse::HTTP_NOT_FOUND
+            );
         }
 
-        // Get videos
         $videos = $this->entityManager
-        ->getRepository(Video::class)
-        ->findBy(
-            [
-                'category' => $getVideosRequest->getCategory(),
-                'country' => $getVideosRequest->getCountry(),
-            ],
-            ['createdAt' => 'DESC'],
-            // We get max 2 videos
-            2
-        );
+            ->getRepository(Video::class)
+            ->createQueryBuilder('v')
+            ->leftJoin('v.ratedByUsers', 'r')
+            ->leftJoin('v.user', 'u')
+            ->addSelect('COUNT(r.id) as likeCount')
+            ->addSelect(
+                'CASE WHEN :currentUser MEMBER OF v.ratedByUsers THEN true ELSE false END as isLikedByCurrentUser'
+            )
+            ->where('v.user != :currentUser')
+            ->andWhere('u.country = :countryFilter')
+            ->setParameter('currentUser', $user)
+            ->setParameter('countryFilter', $createVideoRequest->getCountry())
+            ->groupBy('v.id')
+            ->orderBy('v.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
 
-        // Prepare result
-        $result = array_map(function (Video $video) use ($user) {
+        $result = array_map(function (Video $videoData) {
+            /** @var Video $video */
+            $video = $videoData[0];
+            $likeCount = $videoData['likeCount'];
+            $isLikedByCurrentUser = $videoData['isLikedByCurrentUser'];
+
             return [
                 'id' => $video->getId(),
-                'title' => $video->getTitle(),
-                'description' => $video->getDescription(),
-                'category' => $video->getCategory(),
-                'country' => $video->getCountry(),
-                'isFromCurrentUser' => $user && $video->getUser() === $user,
                 'videoUrl' => $video->getVideoUrl(),
-                'thumbnail' => $video->getThumbnail(),
-                'googleMapsUrl' => $video->getGoogleMapsUrl(),
+                'user' => $video->getUser(),
                 'createdAt' => $video->getCreatedAt()->format('Y-m-d H:i:s'),
+                'likeCount' => $likeCount,
+                'isLikedByCurrentUser' => $isLikedByCurrentUser,
             ];
         }, $videos);
 

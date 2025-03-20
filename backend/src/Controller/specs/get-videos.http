@@ -1,10 +1,8 @@
-### Get all messages of a category and country
-GET http://localhost:8080/api/get-messages
+### Get all videos from a given country
+GET http://localhost:8080/api/get-videos
 Content-Type: application/json
 
 {
-  "userId": 1,
-  "category": "sports",
   "country": "france"
 }
 
