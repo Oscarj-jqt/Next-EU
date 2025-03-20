@@ -65,9 +65,36 @@ class VideoController extends AbstractController
     public function saveVideos(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-        $videoData = $data['videos']; // Expecting an array of videos
+        $videoData = $data['videos'];
 
-        $savedVideos = $this->videoService->saveVideos($videoData);
+
+        $saveVideoRequests = array_map(fn($video) => new SaveVideoRequest(
+            title: $video['title'],
+            category: $video['category'],
+            country: $video['country'],
+            userId: $video['userId'],
+            videoUrl: $video['videoUrl'],
+            description: $video['description'] ?? null,
+            thumbnail: $video['thumbnail'] ?? null,
+            googleMapsUrl: $video['googleMapsUrl'] ?? null
+        ), $videoData);
+
+        // Validation
+        $violations = [];
+        foreach ($saveVideoRequests as $request) {
+            $violations[] = $this->validator->validate($request);
+        }
+
+        foreach ($violations as $violation) {
+            if (count($violation) > 0) {
+                return new JsonResponse(
+                    data: ['errors' => (string)$violation],
+                    status: JsonResponse::HTTP_BAD_REQUEST
+                );
+            }
+        }
+
+        $savedVideos = $this->videoService->saveVideos($saveVideoRequests);
 
         return new JsonResponse(
             data: ['message' => 'Videos saved successfully', 'savedVideos' => $savedVideos],
