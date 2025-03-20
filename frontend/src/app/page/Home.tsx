@@ -16,21 +16,6 @@ const Home: React.FC = () => {
       <div className="w-[393px] h-[750px] overflow-hidden">
         <EuropeMap />
       </div>
-      <button
-        onClick={() => router.push("../connecteMessage")}
-        style={{
-          width: "393px",
-          padding: "12px",
-          backgroundColor: "#007BFF",
-          color: "white",
-          fontSize: "16px",
-          fontWeight: "bold",
-          cursor: "pointer",
-          marginBottom: "20px",
-        }}
-      >
-        Accéder au Chat
-      </button>
     </div>
   );
 };
