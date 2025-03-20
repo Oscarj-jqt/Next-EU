@@ -16,7 +16,10 @@ const ConnecteMessage: React.FC = () => {
         <CountrySelector onSelectCountry={setSelectedCountry} />
       ) : !selectedChannel ? (
         /* Étape 2 : Sélection du channel */
-        <ChannelList country={selectedCountry} onSelectChannel={setSelectedChannel} />
+        <ChannelList
+          country={selectedCountry}
+          onSelectChannel={setSelectedChannel}
+        />
       ) : (
         /* Étape 3 : Chat */
         <Chat country={selectedCountry} channel={selectedChannel} />

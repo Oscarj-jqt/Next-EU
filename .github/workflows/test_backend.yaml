@@ -17,9 +17,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-backend-${{ hashFiles('docker/backend.Dockerfile') }}
+          key: ${{ runner.os }}-docker-backend-test-${{ hashFiles('docker/test/backend-test.Dockerfile') }}
           restore-keys: |
-            ${{ runner.os }}-docker-backend-
+            ${{ runner.os }}-docker-backend-test-
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -31,18 +31,17 @@ jobs:
           docker buildx build \
             --cache-from=type=local,src=/tmp/.buildx-cache \
             --cache-to=type=local,dest=/tmp/.buildx-cache,mode=max \
-            -f docker/backend.Dockerfile \
-            -t backend . --load
+            -f docker/test/backend-test.Dockerfile \
+            -t backend-test . --load
 
       - name: Save backend image
-        run: docker save -o backend.tar backend
+        run: docker save -o backend-test.tar backend-test
 
       - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
-          name: backend-image
-          path: backend.tar
-
+          name: backend-test-image
+          path: backend-test.tar
 
       - name: Run analyse
         run: |
@@ -50,7 +49,7 @@ jobs:
           set -e # Exit immediately if a command exits with a non-zero status.
           set -u # Exit immediately if a variable is not defined.
 
-          docker run --rm backend composer analyse
+          docker run --rm backend-test composer analyse
 
       - name: Run code style checks
         run: |
@@ -58,4 +57,4 @@ jobs:
           set -e # Exit immediately if a command exits with a non-zero status
           set -u # Exit immediately if a variable is not defined
           
-          docker run --rm backend composer fix
+          docker run --rm backend-test composer fix

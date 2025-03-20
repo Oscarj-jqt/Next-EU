@@ -7,7 +7,9 @@ interface ChatProps {
 }
 
 const Chat: React.FC<ChatProps> = ({ country, channel }) => {
-  const [messages, setMessages] = useState<{ user: string; text: string }[]>([]);
+  const [messages, setMessages] = useState<{ user: string; text: string }[]>(
+    [],
+  );
   const [input, setInput] = useState("");
 
   const sendMessage = () => {
@@ -18,9 +20,25 @@ const Chat: React.FC<ChatProps> = ({ country, channel }) => {
   };
 
   return (
-    <div style={{ padding: "20px", display: "flex", flexDirection: "column", height: "100vh" }}>
-      <h2>#{channel} - {country}</h2>
-      <div style={{ flex: 1, overflowY: "auto", border: "1px solid #ccc", padding: "10px" }}>
+    <div
+      style={{
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+        height: "100vh",
+      }}
+    >
+      <h2>
+        #{channel} - {country}
+      </h2>
+      <div
+        style={{
+          flex: 1,
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          padding: "10px",
+        }}
+      >
         {messages.map((msg, index) => (
           <Message key={index} user={msg.user} text={msg.text} />
         ))}
@@ -33,7 +51,15 @@ const Chat: React.FC<ChatProps> = ({ country, channel }) => {
           placeholder="Écrire un message..."
           style={{ flex: 1, padding: "10px", border: "1px solid #ccc" }}
         />
-        <button onClick={sendMessage} style={{ padding: "10px", background: "#007BFF", color: "white", border: "none" }}>
+        <button
+          onClick={sendMessage}
+          style={{
+            padding: "10px",
+            background: "#007BFF",
+            color: "white",
+            border: "none",
+          }}
+        >
           Envoyer
         </button>
       </div>

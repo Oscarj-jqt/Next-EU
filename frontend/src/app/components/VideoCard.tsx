@@ -2,7 +2,18 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaHeart, FaCommentDots, FaShare, FaBookmark, FaLink, FaWhatsapp, FaTwitter, FaSnapchatGhost, FaArrowLeft } from "react-icons/fa"; // Import des icônes
+import {
+  FaHeart,
+  FaCommentDots,
+  FaShare,
+  FaLink,
+  FaWhatsapp,
+  FaTwitter,
+  FaSnapchatGhost,
+  FaArrowLeft,
+} from "react-icons/fa";
+import { CSSProperties } from "react";
+
 
 interface VideoCardProps {
   video: { url: string; description: string };
@@ -12,14 +23,20 @@ interface VideoCardProps {
   onLike: () => void;
 }
 const challenges = [
-    "💪 Défi Sport : Make a video showing your best backflip !",
-  ];
-  const getDailyChallenge = () => {
-    const today = new Date().getDate(); // Récupère le jour du mois (1-31)
-    return challenges[today % challenges.length]; // Alterne selon le jour
-  };
+  "💪 Défi Sport : Make a video showing your best backflip !",
+];
+const getDailyChallenge = () => {
+  const today = new Date().getDate(); // Récupère le jour du mois (1-31)
+  return challenges[today % challenges.length]; // Alterne selon le jour
+};
 
-const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCount, onLike }) => {
+const VideoCard: React.FC<VideoCardProps> = ({
+  video,
+  isActive,
+  isLiked,
+  likesCount,
+  onLike,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -35,7 +52,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
   useEffect(() => {
     if (videoRef.current) {
       if (isActive) {
-        videoRef.current.play().catch((error) => console.log("Playback failed", error));
+        videoRef.current
+          .play()
+          .catch((error) => console.log("Playback failed", error));
       } else {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
@@ -50,19 +69,6 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
       setNewComment("");
     }
   };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(video.url);
-    alert("✅ Lien copié !");
-  };
-
-  // 📌 Générer les liens de partage
-  const shareLinks = {
-    whatsapp: `https://api.whatsapp.com/send?text=Regarde cette vidéo ! ${video.url}`,
-    twitter: `https://twitter.com/intent/tweet?url=${video.url}&text=Regarde cette vidéo !`,
-    snapchat: `https://www.snapchat.com/scan?attachmentUrl=${video.url}`,
-  };
-
 
   // Fermer les commentaires en cliquant à l'extérieur
   const handleOutsideClick = (e: React.MouseEvent) => {
@@ -88,61 +94,55 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
       }}
       onClick={handleOutsideClick} // Ferme les commentaires en cliquant ailleurs
     >
-    <button
-      onClick={() => router.push("/")} // Redirige vers la page d'accueil
-      style={{
-        position: "absolute",
-    top: "20px",
-    left: "20px",
-    backgroundColor: "rgba(0,0,0,0.5)", // Fond semi-transparent
-    color: "white",
-    border: "none",
-    borderRadius: "50%",
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.6)",
-    zIndex: 999,
-      }}
-    >
-    <div
-  style={{
-    position : "absolute",
-    marginLeft : "350px",
-    width: "250px", // ✅ Largeur complète
-    height : "8vh",
-    backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond semi-transparent
-    color: "white",
-     // Espacement vertical
-    fontSize: "16px",
-    fontWeight: "bold",
-    textAlign: "center",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.4)", // Ombre subtile
-    borderBottomLeftRadius: "10px", // Coins arrondis en bas
-    borderBottomRightRadius: "10px",
-    borderTopLeftRadius : "10px",
-    borderTopRightRadius : "10px",
-    display : "flex",
-    justifyContent : "center",
-    
-  }}
->
-  {getDailyChallenge()}
-</div>
-      <FaArrowLeft size={20} />
-    </button>
+      <button
+        onClick={() => router.push("/")} // Redirige vers la page d'accueil
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          backgroundColor: "rgba(0,0,0,0.5)", // Fond semi-transparent
+          color: "white",
+          border: "none",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.6)",
+          zIndex: 999,
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            marginLeft: "350px",
+            width: "250px", // ✅ Largeur complète
+            height: "8vh",
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond semi-transparent
+            color: "white",
+            // Espacement vertical
+            fontSize: "16px",
+            fontWeight: "bold",
+            textAlign: "center",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.4)", // Ombre subtile
+            borderBottomLeftRadius: "10px", // Coins arrondis en bas
+            borderBottomRightRadius: "10px",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {getDailyChallenge()}
+        </div>
+        <FaArrowLeft size={20} />
+      </button>
       <video
         ref={videoRef}
         src={video.url}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
+        className="w-full h-full object-cover rounded-lg"
         loop
         muted
         playsInline
@@ -180,7 +180,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           >
             <FaHeart size={30} color={isLiked ? "red" : "white"} />
           </button>
-          <span style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>{likesCount}</span>
+          <span
+            style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}
+          >
+            {likesCount}
+          </span>
         </div>
 
         {/* 💬 Commentaire */}
@@ -205,7 +209,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           >
             <FaCommentDots size={30} color="white" />
           </button>
-          <span style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>{comments.length}</span>
+          <span
+            style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}
+          >
+            {comments.length}
+          </span>
         </div>
 
         <div style={{ textAlign: "center" }}>
@@ -232,7 +240,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
       {/* 📤 Section de Partage */}
       {showShareOptions && (
         <div
-        style={{
+          style={{
             position: "absolute",
             bottom: "0",
             left: "0",
@@ -244,35 +252,64 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
             textAlign: "center",
           }}
         >
-          <div style={{ color: "black", fontSize: "18px", fontWeight: "bold", marginBottom: "10px" }}>
+          <div
+            style={{
+              color: "black",
+              fontSize: "18px",
+              fontWeight: "bold",
+              marginBottom: "10px",
+            }}
+          >
             Partager la vidéo
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "10px" }}>
-          {/* 📋 Copier le lien */}
-          <button onClick={handleCopyLink} style={buttonStyle}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "20px",
+              marginBottom: "10px",
+            }}
+          >
+            {/* 📋 Copier le lien */}
+            <button onClick={handleCopyLink} style={buttonStyle}>
               <FaLink size={24} color="gray" />
               <span style={labelStyle}>Copier</span>
             </button>
 
-          {/* 📱 WhatsApp */}
-          <a href={`https://api.whatsapp.com/send?text=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 📱 WhatsApp */}
+            <a
+              href={`https://api.whatsapp.com/send?text=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaWhatsapp size={24} color="green" />
               <span style={labelStyle}>WhatsApp</span>
             </a>
 
-          {/* 🐦 Twitter */}
-          <a href={`https://twitter.com/intent/tweet?url=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 🐦 Twitter */}
+            <a
+              href={`https://twitter.com/intent/tweet?url=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaTwitter size={24} color="blue" />
               <span style={labelStyle}>Twitter</span>
             </a>
 
-          {/* 👻 Snapchat */}
-          <a href={`https://www.snapchat.com/scan?attachmentUrl=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 👻 Snapchat */}
+            <a
+              href={`https://www.snapchat.com/scan?attachmentUrl=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaSnapchatGhost size={24} color="yellow" />
               <span style={labelStyle}>Snapchat</span>
             </a>
-        </div>
+          </div>
         </div>
       )}
 
@@ -309,7 +346,15 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           </div>
 
           {/* 📜 Liste des commentaires */}
-          <div style={{ flex: 1, overflowY: "auto", color: "black", fontSize: "14px", padding: "5px" }}>
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              color: "black",
+              fontSize: "14px",
+              padding: "5px",
+            }}
+          >
             {comments.length > 0 ? (
               comments.map((comment, index) => (
                 <div
@@ -324,7 +369,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
                 </div>
               ))
             ) : (
-              <div style={{ color: "#888", textAlign: "center" }}>Aucun commentaire</div>
+              <div style={{ color: "#888", textAlign: "center" }}>
+                Aucun commentaire
+              </div>
             )}
           </div>
 
@@ -370,22 +417,22 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
     </div>
   );
 };
-const buttonStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "60px",
-    height: "60px",
-    backgroundColor: "rgba(214, 213, 213, 0.9)",
-    borderRadius: "50%",
-    textDecoration: "none",
-  };
-  
-  const labelStyle = {
-    color: "black",
-    fontSize: "12px",
-    marginTop: "5px",
-  };
+const buttonStyle: CSSProperties = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "60px",
+  height: "60px",
+  backgroundColor: "rgba(214, 213, 213, 0.9)",
+  borderRadius: "50%",
+  textDecoration: "none",
+};
+
+const labelStyle = {
+  color: "black",
+  fontSize: "12px",
+  marginTop: "5px",
+};
 
 export default VideoCard;

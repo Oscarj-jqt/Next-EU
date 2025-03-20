@@ -1,13 +1,22 @@
 import React from "react";
-import countries from "../data/countries.json"; 
+import countries from "../data/countries.json";
 
 interface CountrySelectorProps {
   onSelectCountry: (country: string) => void;
 }
 
-const CountrySelector: React.FC<CountrySelectorProps> = ({ onSelectCountry }) => {
+const CountrySelector: React.FC<CountrySelectorProps> = ({
+  onSelectCountry,
+}) => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", padding: "20px" }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        padding: "20px",
+      }}
+    >
       {countries.map((country) => (
         <button
           key={country.name}
@@ -16,7 +25,7 @@ const CountrySelector: React.FC<CountrySelectorProps> = ({ onSelectCountry }) =>
             margin: "10px",
             border: "none",
             background: "none",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         >
           <img src={country.flag} alt={country.name} width={50} height={50} />

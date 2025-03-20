@@ -1,0 +1,13 @@
+### Get all videos from a given country
+GET http://localhost:8080/api/get-videos
+Content-Type: application/json
+
+{
+  "country": "france"
+}
+
+> {%
+    client.test("It should return a successful status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}

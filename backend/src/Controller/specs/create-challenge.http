@@ -1,0 +1,15 @@
+### Create a new challenge
+POST http://localhost:8080/api/create-challenge
+Content-Type: application/json
+
+{
+  "validUntil": "2025-03-21 00:00",
+  "title": "Bottleflip challenge",
+  "description": "Do 3 Bottlefilps in a row"
+}
+
+> {%
+    client.test("It should return a successful status code", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+    });
+%}
