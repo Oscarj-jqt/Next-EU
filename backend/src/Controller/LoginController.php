@@ -27,7 +27,6 @@ class LoginController extends AbstractController
             return new JsonResponse(['message' => 'Username and password are required'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        // checking if user exists
         $user = $this->entityManager
             ->getRepository(User::class)
             ->findOneBy(['username' => $username]);
@@ -36,12 +35,10 @@ class LoginController extends AbstractController
             return new JsonResponse(['message' => 'User not found'], JsonResponse::HTTP_NOT_FOUND);
         }
 
-        // Verify password
         if (!$passwordEncoder->isPasswordValid($user, $password)) {
             return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
-        // Create the token for user
         $username = $user->getUsername();
 
         return new JsonResponse([
