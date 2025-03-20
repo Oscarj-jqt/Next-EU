@@ -17,12 +17,12 @@ const Home: React.FC = () => {
         <EuropeMap />
       </div>
 
-      <button
+      {/* <button
         onClick={() => router.push("../connecteMessage")}
         className="w-[393px] p-3 bg-blue-600 text-white text-lg font-bold cursor-pointer mb-5"
       >
         Accéder au Chat
-      </button>
+      </button> */}
 
       {/* Affiche la notification automatiquement */}
       <NotificationPopup />
