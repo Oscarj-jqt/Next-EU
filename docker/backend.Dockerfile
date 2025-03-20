@@ -17,6 +17,8 @@ COPY backend .
 
 RUN composer install --optimize-autoloader
 RUN composer require "lexik/jwt-authentication-bundle"
+RUN composer require doctrine/doctrine-fixtures-bundle --dev
+
 
 RUN mkdir -p var/cache var/logs var/sessions && \
     chown -R www-data:www-data var/cache var/logs var/sessions
