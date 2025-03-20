@@ -6,7 +6,10 @@ interface ChannelListProps {
   onSelectChannel: (channel: string) => void;
 }
 
-const ChannelList: React.FC<ChannelListProps> = ({ country, onSelectChannel }) => {
+const ChannelList: React.FC<ChannelListProps> = ({
+  country,
+  onSelectChannel,
+}) => {
   return (
     <div style={{ padding: "20px" }}>
       <h2>Channels pour {country}</h2>
@@ -22,7 +25,7 @@ const ChannelList: React.FC<ChannelListProps> = ({ country, onSelectChannel }) =
             color: "white",
             border: "none",
             cursor: "pointer",
-            borderRadius: "5px"
+            borderRadius: "5px",
           }}
         >
           #{channel}

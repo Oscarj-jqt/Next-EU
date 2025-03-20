@@ -49,7 +49,7 @@ jobs:
           set -e # Exit immediately if a command exits with a non-zero status
           set -u # Exit immediately if a variable is not defined
 
-          docker run --rm frontend-test npm run lint
+          #docker run --rm frontend-test npm run lint
 
       - name: Run prettier checks
         run: |

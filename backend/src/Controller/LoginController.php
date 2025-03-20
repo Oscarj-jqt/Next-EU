@@ -9,8 +9,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class LoginController extends AbstractController
 {
@@ -49,6 +47,6 @@ class LoginController extends AbstractController
         return new JsonResponse([
             'message' => 'Logged successfully',
             'username' => $username,
-        ], JsonResponse::HTTP_OK);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

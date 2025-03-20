@@ -37,8 +37,7 @@
         "friendsofphp/php-cs-fixer": "*",
         "phpstan/phpstan": "^2.1",
         "symfony/maker-bundle": "^1.62",
-        "doctrine/doctrine-fixtures-bundle": "^4.0",
-        "lexik/jwt-authentication-bundle": "*"
+        "doctrine/doctrine-fixtures-bundle": "^4.0"
     },
     "config": {
         "allow-plugins": {

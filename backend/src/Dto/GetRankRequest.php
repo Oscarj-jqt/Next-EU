@@ -5,7 +5,7 @@ namespace App\Dto;
 use App\Enum\CountryEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
-readonly class GetVideosRequest
+readonly class GetRankRequest
 {
     public function __construct(
         #[Assert\NotBlank(message: 'Country is required')]

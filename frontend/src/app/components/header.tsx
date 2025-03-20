@@ -6,8 +6,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <nav className="w-[393px] bg-[#b6f3ff] p-4 flex justify-between items-center">
-     
-      <h1 className="text-lg text-white font-bold">EU-TALENT</h1> 
+      <h1 className="text-lg text-white font-bold">EU-TALENT</h1>
 
       <div className="flex items-center px-2 py-1">
         <MagnifyingGlassIcon className="h-5 w-5 text-gray-600" />
@@ -24,4 +23,4 @@ const Header = () => {
   );
 };
 
-export default Header;                                                                                                                                      
+export default Header;

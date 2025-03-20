@@ -2,7 +2,15 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaHeart, FaCommentDots, FaShare, FaBookmark, FaLink, FaWhatsapp, FaTwitter, FaSnapchatGhost, FaArrowLeft } from "react-icons/fa"; 
+import {
+  FaHeart,
+  FaCommentDots,
+  FaShare,
+  FaLink,
+  FaWhatsapp,
+  FaTwitter,
+  FaSnapchatGhost,
+} from "react-icons/fa";
 
 interface VideoCardProps {
   video: { url: string; description: string };
@@ -12,7 +20,13 @@ interface VideoCardProps {
   onLike: () => void;
 }
 
-const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCount, onLike }) => {
+const VideoCard: React.FC<VideoCardProps> = ({
+  video,
+  isActive,
+  isLiked,
+  likesCount,
+  onLike,
+}) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showShareOptions, setShowShareOptions] = useState(false);
   const [showComments, setShowComments] = useState(false);
@@ -28,7 +42,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
   useEffect(() => {
     if (videoRef.current) {
       if (isActive) {
-        videoRef.current.play().catch((error) => console.log("Playback failed", error));
+        videoRef.current
+          .play()
+          .catch((error) => console.log("Playback failed", error));
       } else {
         videoRef.current.pause();
         videoRef.current.currentTime = 0;
@@ -56,7 +72,6 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
     snapchat: `https://www.snapchat.com/scan?attachmentUrl=${video.url}`,
   };
 
-
   // Fermer les commentaires en cliquant à l'extérieur
   const handleOutsideClick = (e: React.MouseEvent) => {
     if (showComments) {
@@ -69,7 +84,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
 
   return (
     <div className="relative flex items-center justify-center h-screen w-[393px] snap-start bg-black">
-      <video ref={videoRef} src={video.url}
+      <video
+        ref={videoRef}
+        src={video.url}
         className="w-full h-full object-cover rounded-lg"
         loop
         muted
@@ -108,7 +125,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           >
             <FaHeart size={30} color={isLiked ? "red" : "white"} />
           </button>
-          <span style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>{likesCount}</span>
+          <span
+            style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}
+          >
+            {likesCount}
+          </span>
         </div>
 
         {/* 💬 Commentaire */}
@@ -133,7 +154,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           >
             <FaCommentDots size={30} color="white" />
           </button>
-          <span style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}>{comments.length}</span>
+          <span
+            style={{ color: "white", fontSize: "14px", fontWeight: "bold" }}
+          >
+            {comments.length}
+          </span>
         </div>
 
         <div style={{ textAlign: "center" }}>
@@ -160,7 +185,7 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
       {/* 📤 Section de Partage */}
       {showShareOptions && (
         <div
-        style={{
+          style={{
             position: "absolute",
             bottom: "0",
             left: "0",
@@ -172,35 +197,64 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
             textAlign: "center",
           }}
         >
-          <div style={{ color: "black", fontSize: "18px", fontWeight: "bold", marginBottom: "10px" }}>
+          <div
+            style={{
+              color: "black",
+              fontSize: "18px",
+              fontWeight: "bold",
+              marginBottom: "10px",
+            }}
+          >
             Partager la vidéo
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "10px" }}>
-          {/* 📋 Copier le lien */}
-          <button onClick={handleCopyLink} style={buttonStyle}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "20px",
+              marginBottom: "10px",
+            }}
+          >
+            {/* 📋 Copier le lien */}
+            <button onClick={handleCopyLink} style={buttonStyle}>
               <FaLink size={24} color="gray" />
               <span style={labelStyle}>Copier</span>
             </button>
 
-          {/* 📱 WhatsApp */}
-          <a href={`https://api.whatsapp.com/send?text=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 📱 WhatsApp */}
+            <a
+              href={`https://api.whatsapp.com/send?text=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaWhatsapp size={24} color="green" />
               <span style={labelStyle}>WhatsApp</span>
             </a>
 
-          {/* 🐦 Twitter */}
-          <a href={`https://twitter.com/intent/tweet?url=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 🐦 Twitter */}
+            <a
+              href={`https://twitter.com/intent/tweet?url=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaTwitter size={24} color="blue" />
               <span style={labelStyle}>Twitter</span>
             </a>
 
-          {/* 👻 Snapchat */}
-          <a href={`https://www.snapchat.com/scan?attachmentUrl=${video.url}`} target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+            {/* 👻 Snapchat */}
+            <a
+              href={`https://www.snapchat.com/scan?attachmentUrl=${video.url}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={buttonStyle}
+            >
               <FaSnapchatGhost size={24} color="yellow" />
               <span style={labelStyle}>Snapchat</span>
             </a>
-        </div>
+          </div>
         </div>
       )}
 
@@ -237,7 +291,15 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
           </div>
 
           {/* 📜 Liste des commentaires */}
-          <div style={{ flex: 1, overflowY: "auto", color: "black", fontSize: "14px", padding: "5px" }}>
+          <div
+            style={{
+              flex: 1,
+              overflowY: "auto",
+              color: "black",
+              fontSize: "14px",
+              padding: "5px",
+            }}
+          >
             {comments.length > 0 ? (
               comments.map((comment, index) => (
                 <div
@@ -252,7 +314,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
                 </div>
               ))
             ) : (
-              <div style={{ color: "#888", textAlign: "center" }}>Aucun commentaire</div>
+              <div style={{ color: "#888", textAlign: "center" }}>
+                Aucun commentaire
+              </div>
             )}
           </div>
 
@@ -294,21 +358,21 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
   );
 };
 const buttonStyle = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "60px",
-    height: "60px",
-    backgroundColor: "rgba(214, 213, 213, 0.9)",
-    borderRadius: "50%",
-    textDecoration: "none",
-  };
-  
-  const labelStyle = {
-    color: "black",
-    fontSize: "12px",
-    marginTop: "5px",
-  };
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "60px",
+  height: "60px",
+  backgroundColor: "rgba(214, 213, 213, 0.9)",
+  borderRadius: "50%",
+  textDecoration: "none",
+};
+
+const labelStyle = {
+  color: "black",
+  fontSize: "12px",
+  marginTop: "5px",
+};
 
 export default VideoCard;

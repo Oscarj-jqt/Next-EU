@@ -6,19 +6,8 @@
     docker compose up -d
 ```
 
-## User Management
-- Following
-- Register
-- Login
+## BE
 
-### Details
-- Password
-- Username
-- Country (Creator)
-- Profile Picture
-
-
-## Short videos 
-- Swiping
-- Like & Dislike
-- Sharing von Videos
+- hosting
+- saving videos
+- jwt

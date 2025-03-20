@@ -64,18 +64,6 @@
             ".php-cs-fixer.dist.php"
         ]
     },
-    "lexik/jwt-authentication-bundle": {
-        "version": "3.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "2.5",
-            "ref": "e9481b233a11ef7e15fe055a2b21fd3ac1aa2bb7"
-        },
-        "files": [
-            "./config/packages/lexik_jwt_authentication.yaml"
-        ]
-    },
     "nelmio/cors-bundle": {
         "version": "2.5",
         "recipe": {
@@ -187,10 +175,7 @@
             "version": "6.4",
             "ref": "cab5fd2a13a45c266d45a7d9337e28dee6272877"
         },
-        "files": [
-            "config/packages/twig.yaml",
-            "templates/base.html.twig"
-        ]
+        "files": []
     },
     "symfony/uid": {
         "version": "7.2",

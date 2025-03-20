@@ -8,7 +8,7 @@ import europeGeoJson from "../data/europe.json";
 
 const europeBounds = [
   [71.2, -25.0], // Nord-Ouest
-  [34.5, 45.0] // Sud-Est
+  [34.5, 45.0], // Sud-Est
 ];
 
 const EuropeMap: React.FC = () => {
@@ -24,7 +24,10 @@ const EuropeMap: React.FC = () => {
     });
 
     if (feature.properties && feature.properties.NAME) {
-      layer.bindTooltip(feature.properties.NAME, { permanent: false, direction: "center" });
+      layer.bindTooltip(feature.properties.NAME, {
+        permanent: false,
+        direction: "center",
+      });
     }
 
     layer.on("mouseover", function () {
@@ -37,7 +40,7 @@ const EuropeMap: React.FC = () => {
 
     layer.on("click", function () {
       const countryName = feature.properties?.NAME; // Correction ici (majuscule)
-      
+
       console.log("🌍 Pays cliqué :", countryName); // Vérifier si le pays est bien détecté
 
       if (!countryName) {

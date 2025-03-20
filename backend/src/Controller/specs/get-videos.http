@@ -1,11 +1,9 @@
-### Validate a quiz answer
-POST http://localhost:8080/api/validate-quiz-answer
+### Get all videos from a given country
+GET http://localhost:8080/api/get-videos
 Content-Type: application/json
 
 {
-  "quizId": 1,
-  "userId": 1,
-  "answer": "test"
+  "country": "france"
 }
 
 > {%

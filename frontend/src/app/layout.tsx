@@ -25,7 +25,9 @@ export default function Layout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         {/* Affichage de la notification */}
         <NotificationPopup />
 

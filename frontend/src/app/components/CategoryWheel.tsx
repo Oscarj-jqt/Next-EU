@@ -3,7 +3,14 @@
 import React, { useState } from "react";
 import styles from "./CategoryWheel.module.css"; // Import du CSS
 
-const categories = ["Food", "Sport", "Architecture", "Travel", "Tech", "Nature"];
+const categories = [
+  "Food",
+  "Sport",
+  "Architecture",
+  "Travel",
+  "Tech",
+  "Nature",
+];
 
 const CategoryWheel: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0); // Catégorie active
@@ -37,8 +44,15 @@ const CategoryWheel: React.FC = () => {
       </div>
 
       {/* Boutons pour tourner la roue */}
-      <button className={styles.arrowLeft} onClick={() => rotateWheel("left")}>◀</button>
-      <button className={styles.arrowRight} onClick={() => rotateWheel("right")}>▶</button>
+      <button className={styles.arrowLeft} onClick={() => rotateWheel("left")}>
+        ◀
+      </button>
+      <button
+        className={styles.arrowRight}
+        onClick={() => rotateWheel("right")}
+      >
+        ▶
+      </button>
     </div>
   );
 };

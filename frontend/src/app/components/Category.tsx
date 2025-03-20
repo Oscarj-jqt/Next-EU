@@ -3,8 +3,18 @@
 import { motion } from "framer-motion";
 
 const categories = [
-  "Food", "Memes", "Musées", "Art", "Sport", "Voyage",
-  "Tech", "Nature", "Films", "Livres", "Histoire", "Musique"
+  "Food",
+  "Memes",
+  "Musées",
+  "Art",
+  "Sport",
+  "Voyage",
+  "Tech",
+  "Nature",
+  "Films",
+  "Livres",
+  "Histoire",
+  "Musique",
 ];
 
 const Category = () => {
@@ -39,9 +49,7 @@ const Category = () => {
                 transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
               }}
             >
-              <div
-                className="bg-[#00008B] px-4 py-2 rounded-full text-sm font-semibold shadow-md"
-              >
+              <div className="bg-[#00008B] px-4 py-2 rounded-full text-sm font-semibold shadow-md">
                 {category}
               </div>
             </div>
@@ -53,5 +61,3 @@ const Category = () => {
 };
 
 export default Category;
-
-

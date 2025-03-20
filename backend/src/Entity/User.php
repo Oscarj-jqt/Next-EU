@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\CountryEnum;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,34 +16,26 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     #[ORM\Column]
     private int $id;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
     private string $username;
 
     #[ORM\Column(length: 255)]
     private string $password;
 
-    #[ORM\Column(length: 255)]
-    private string $country;
+    #[ORM\Column(enumType: CountryEnum::class)]
+    private CountryEnum $country;
 
-    #[ORM\Column(length: 255)]
-    private string $profilePicture;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $profilePicture = null;
 
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
-    // Relation avec l'entité Video
     /**
      * @var Collection<int, Video>
      */
     #[ORM\OneToMany(targetEntity: Video::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $uploadedVideos;
-
-    // Relation avec les vidéos notées et sauvegardées
-    /**
-     * @var Collection<int, Video>
-     */
-    #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'savedByUsers')]
-    private Collection $savedVideos;
 
     /**
      * @var Collection<int, Video>
@@ -50,17 +43,11 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     #[ORM\ManyToMany(targetEntity: Video::class, mappedBy: 'ratedByUsers')]
     private Collection $ratedVideos;
 
-    /**
-     * @var Collection<int, QuizConnection>
-     */
-    #[ORM\OneToMany(targetEntity: QuizConnection::class, mappedBy: 'user')]
-    private Collection $answeredQuizQuestions;
-
     public function __construct()
     {
         $this->uploadedVideos = new ArrayCollection();
-        $this->savedVideos = new ArrayCollection();
         $this->ratedVideos = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): int
@@ -99,24 +86,24 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
         return $this;
     }
 
-    public function getCountry(): ?string
+    public function getCountry(): CountryEnum
     {
         return $this->country;
     }
 
-    public function setCountry(string $country): static
+    public function setCountry(CountryEnum $country): static
     {
         $this->country = $country;
 
         return $this;
     }
 
-    public function getProfilePicture(): string
+    public function getProfilePicture(): ?string
     {
         return $this->profilePicture;
     }
 
-    public function setProfilePicture(string $profilePicture): static
+    public function setProfilePicture(?string $profilePicture): static
     {
         $this->profilePicture = $profilePicture;
 
@@ -156,24 +143,6 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     /**
      * @return Collection<int, Video>
      */
-    public function getSavedVideos(): Collection
-    {
-        return $this->savedVideos;
-    }
-
-    /**
-     * @param Collection<int, Video> $savedVideos
-     */
-    public function setSavedVideos(Collection $savedVideos): self
-    {
-        $this->savedVideos = $savedVideos;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Video>
-     */
     public function getRatedVideos(): Collection
     {
         return $this->ratedVideos;
@@ -185,24 +154,6 @@ class User implements \Symfony\Component\Security\Core\User\PasswordAuthenticate
     public function setRatedVideos(Collection $ratedVideos): self
     {
         $this->ratedVideos = $ratedVideos;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, QuizConnection>
-     */
-    public function getAnsweredQuizQuestions(): Collection
-    {
-        return $this->answeredQuizQuestions;
-    }
-
-    /**
-     * @param Collection<int, QuizConnection> $answeredQuizQuestions
-     */
-    public function setAnsweredQuizQuestions(Collection $answeredQuizQuestions): self
-    {
-        $this->answeredQuizQuestions = $answeredQuizQuestions;
 
         return $this;
     }

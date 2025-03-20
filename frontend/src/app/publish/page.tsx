@@ -1,8 +1,7 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-import Link from "next/link"; 
-import { FaTimes, FaRedo, FaStop, FaPaperPlane, FaVideo } from "react-icons/fa"; 
-
+import Link from "next/link";
+import { FaTimes, FaRedo, FaStop, FaPaperPlane, FaVideo } from "react-icons/fa";
 
 const CameraRecorder = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -20,7 +19,10 @@ const CameraRecorder = () => {
 
   const startCamera = async () => {
     try {
-      const newStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      const newStream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
       setStream(newStream);
       if (videoRef.current) {
         videoRef.current.srcObject = newStream;
@@ -99,7 +101,7 @@ const CameraRecorder = () => {
       {/* Bouton retour à l'accueil */}
       <Link href="/home">
         <button className="absolute top-5 right-5 px-4 py-2 z-50 font-extrabold text-3xl">
-        <FaTimes />
+          <FaTimes />
         </button>
       </Link>
 
@@ -144,16 +146,13 @@ const CameraRecorder = () => {
               <FaRedo />
             </button>
             <Link href="/home">
-
-         
-            <button
-              onClick={uploadVideo}
-              className="px-6 py-3 text-white text-3xl"
-            >
-              <FaPaperPlane />
-            </button>
+              <button
+                onClick={uploadVideo}
+                className="px-6 py-3 text-white text-3xl"
+              >
+                <FaPaperPlane />
+              </button>
             </Link>
-            
           </div>
         </div>
       )}
