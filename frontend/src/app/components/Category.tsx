@@ -11,7 +11,7 @@ const Category = () => {
   const radius = 150; // Le rayon du cercle
 
   return (
-    <div className="w-[393px] h-[0px] relative">
+    <div className="w-[393px] h-0 relative">
       {/* { Conteneur de fond } */}
       <div className="absolute inset-0 bg-transparent-200 z-1">
         {/* { Remplace la couleur de fond par une carte si nécessaire } */}
