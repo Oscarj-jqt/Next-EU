@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link"; 
+import { FaTimes, FaRedo, FaStop, FaPaperPlane, FaVideo } from "react-icons/fa"; 
 
 const CameraRecorder = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -97,7 +98,7 @@ const CameraRecorder = () => {
       {/* Bouton retour à l'accueil */}
       <Link href="/home">
         <button className="absolute top-5 right-5 px-4 py-2 z-50 font-extrabold text-3xl">
-          X
+        <FaTimes />
         </button>
       </Link>
 
@@ -115,14 +116,14 @@ const CameraRecorder = () => {
                 onClick={stopRecording}
                 className="px-6 py-3 text-white rounded-full text-3xl"
               >
-                ⏹️ 
+                <FaStop />
               </button>
             ) : (
               <button
                 onClick={startRecording}
                 className="px-6 py-3 text-white rounded-full text-3xl font-extrabold"
               >
-                O
+                <FaVideo />
               </button>
             )}
           </div>
@@ -139,13 +140,13 @@ const CameraRecorder = () => {
               onClick={() => setVideoBlob(null)}
               className="px-6 py-3 text-white text-3xl"
             >
-              🔄
+              <FaRedo />
             </button>
             <button
               onClick={uploadVideo}
               className="px-6 py-3 text-white text-3xl"
             >
-              ⬆️
+              <FaPaperPlane />
             </button>
           </div>
         </div>
