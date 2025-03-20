@@ -93,15 +93,13 @@ const CameraRecorder = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-black relative">
+    <div className="w-screen h-screen flex flex-col items-center justify-center bg-black relative max-w-[393px] mx-auto">
       {/* Bouton retour à l'accueil */}
-    <Link href="/home">
-        <button
-            className="absolute top-5 right-5 px-4 py-2 z-50 font-extrabold text-7xl"
-        >
-            X
+      <Link href="/home">
+        <button className="absolute top-5 right-5 px-4 py-2 z-50 font-extrabold text-3xl">
+          X
         </button>
-    </Link>
+      </Link>
 
       {!videoBlob ? (
         <>
@@ -115,14 +113,14 @@ const CameraRecorder = () => {
             {recording ? (
               <button
                 onClick={stopRecording}
-                className="px-6 py-3 text-white rounded-full text-7xl"
+                className="px-6 py-3 text-white rounded-full text-3xl"
               >
                 ⏹️ 
               </button>
             ) : (
               <button
                 onClick={startRecording}
-                className="px-6 py-3 text-white rounded-full text-7xl font-extrabold"
+                className="px-6 py-3 text-white rounded-full text-3xl font-extrabold"
               >
                 O
               </button>
@@ -139,15 +137,15 @@ const CameraRecorder = () => {
           <div className="absolute bottom-10 flex gap-4">
             <button
               onClick={() => setVideoBlob(null)}
-              className="px-6 py-3 text-white rounded-full text-7xl"
+              className="px-6 py-3 text-white text-3xl"
             >
               🔄
             </button>
             <button
               onClick={uploadVideo}
-              className="px-6 py-3 bg-blue-600 text-white rounded-full text-7xl"
+              className="px-6 py-3 text-white text-3xl"
             >
-              📤 Envoyer la vidéo
+              ⬆️
             </button>
           </div>
         </div>
