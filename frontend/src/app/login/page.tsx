@@ -76,7 +76,6 @@ export default function Login() {
           </button>
         </form>
 
-<<<<<<< HEAD:frontend/src/app/login/page.tsx
                 <p className="text-gray-600 text-sm text-center mt-4">
                     Don't have an account?
                     <Link href="/register" className="text-blue-500 hover:underline">
@@ -86,16 +85,4 @@ export default function Login() {
             </div>
         </div>
     );
-=======
-        <p className="text-gray-600 text-sm text-center mt-4">
-          Don&#39;t have an account?
-          <a href="/register" className="text-blue-500 hover:underline">
-            {" "}
-            Register
-          </a>
-        </p>
-      </div>
-    </div>
-  );
->>>>>>> Oscar:frontend/src/app/page/Login.tsx
 }

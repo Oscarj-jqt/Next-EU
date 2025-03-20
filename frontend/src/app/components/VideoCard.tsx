@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { FaHeart, FaCommentDots, FaShare, FaBookmark, FaLink, FaWhatsapp, FaTwitter, FaSnapchatGhost, FaArrowLeft } from "react-icons/fa"; // Import des icônes
+import { FaHeart, FaCommentDots, FaShare, FaBookmark, FaLink, FaWhatsapp, FaTwitter, FaSnapchatGhost, FaArrowLeft } from "react-icons/fa"; 
 
 interface VideoCardProps {
   video: { url: string; description: string };
@@ -68,56 +68,9 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
   };
 
   return (
-<<<<<<< HEAD
     <div className="relative flex items-center justify-center h-screen w-[393px] snap-start bg-black">
       <video ref={videoRef} src={video.url}
         className="w-full h-full object-cover rounded-lg"
-=======
-    <div
-      style={{
-        height: "100vh",
-        width: "393px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        scrollSnapAlign: "start",
-        position: "relative",
-        backgroundColor: "black",
-      }}
-      onClick={handleOutsideClick} // Ferme les commentaires en cliquant ailleurs
-    >
-    <button
-      onClick={() => router.push("/")} // Redirige vers la page d'accueil
-      style={{
-        position: "absolute",
-    top: "20px",
-    left: "20px",
-    backgroundColor: "rgba(0,0,0,0.5)", // Fond semi-transparent
-    color: "white",
-    border: "none",
-    borderRadius: "50%",
-    width: "40px",
-    height: "40px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    cursor: "pointer",
-    boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.6)",
-    zIndex: 999,
-      }}
-    >
-      <FaArrowLeft size={20} />
-    </button>
-      <video
-        ref={videoRef}
-        src={video.url}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
->>>>>>> hugo
         loop
         muted
         playsInline
