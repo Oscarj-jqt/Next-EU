@@ -1,4 +1,7 @@
+"use client";
+
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -75,10 +78,9 @@ export default function Login() {
 
         <p className="text-gray-600 text-sm text-center mt-4">
           Don&#39;t have an account?
-          <a href="/register" className="text-blue-500 hover:underline">
-            {" "}
+          <Link href="/register" className="text-blue-500 hover:underline">
             Register
-          </a>
+          </Link>
         </p>
       </div>
     </div>
