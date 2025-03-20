@@ -32,6 +32,8 @@ COPY --from=builder /var/www/html .
 
 RUN chown -R www-data:www-data var/cache var/logs var/sessions
 
-EXPOSE 8080
+EXPOSE ${PORT}
 
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT} -t public"]
+RUN sh -c "export $(grep -v '^#' .env.prod | xargs) && php /var/www/html/bin/console doctrine:migrations:migrate --no-interaction"
+
+CMD ["sh", "-c", "export $(grep -v '^#' .env.prod | xargs) && php -S 0.0.0.0:${PORT} -t public"]
