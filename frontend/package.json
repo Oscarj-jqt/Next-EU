@@ -17,9 +17,14 @@
     "next": "^15.2.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "react-leaflet": "^5.0.0",
     "react-router-dom": "^6.30.0",
     "tailwind-scrollbar-hide": "^2.0.0"
+=======
+    "react-icons": "^5.5.0",
+    "react-leaflet": "^5.0.0"
+>>>>>>> hugo
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
