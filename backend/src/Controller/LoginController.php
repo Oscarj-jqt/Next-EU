@@ -16,8 +16,8 @@ class LoginController extends AbstractController
     {
     }
 
-    #[Route('/api/authenticate-user', name: 'user_login', methods: ['POST'])]
-    public function login(Request $request, UserPasswordHasherInterface $passwordHasher): JsonResponse
+    #[Route('/login', name: 'user_login', methods: ['POST'])]
+    public function login(Request $request, UserPasswordHasherInterface $passwordEncoder): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
         $username = $data['username'] ?? null;
@@ -37,13 +37,16 @@ class LoginController extends AbstractController
         }
 
         // Verify password
-        if (!$passwordHasher->isPasswordValid($user, $password)) {
+        if (!$passwordEncoder->isPasswordValid($user, $password)) {
             return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
+        // Create the token for user
+        $username = $user->getUsername();
+
         return new JsonResponse([
-            'message' => 'Login successful',
-            'username' => $user->getUsername(),
+            'message' => 'Logged successfully',
+            'username' => $username,
         ], JsonResponse::HTTP_OK);
     }
 }

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "lexik/jwt-authentication-bundle": "^3.1"
+    }
+}

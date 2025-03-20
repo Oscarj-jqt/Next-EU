@@ -36,6 +36,9 @@ class Video
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $googleMapsUrl = null;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $videoUrl = null;
+
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
@@ -151,6 +154,18 @@ class Video
     public function setGoogleMapsUrl(?string $googleMapsUrl): static
     {
         $this->googleMapsUrl = $googleMapsUrl;
+
+        return $this;
+    }
+
+    public function getVideoUrl(): ?string
+    {
+        return $this->videoUrl;
+    }
+
+    public function setVideoUrl(?string $videoUrl): static
+    {
+        $this->videoUrl = $videoUrl;
 
         return $this;
     }
