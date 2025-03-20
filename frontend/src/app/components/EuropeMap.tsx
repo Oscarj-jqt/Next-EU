@@ -7,8 +7,8 @@ import "leaflet/dist/leaflet.css";
 import europeGeoJson from "../data/europe.json";
 
 const europeBounds = [
-  [71.2, -25.0], // Nord-Ouest
-  [34.5, 45.0] // Sud-Est
+  [75.0, -30.0], // 🔼 Augmente au nord-ouest (plus haut et à gauche)
+  [30.0, 50.0]   // 🔽 Augmente au sud-est (plus bas et à droite, inclut mieux Chypre)
 ];
 
 const EuropeMap: React.FC = () => {
@@ -52,7 +52,7 @@ const EuropeMap: React.FC = () => {
   return (
     <div style={{ width: "100%", height: "100%", backgroundColor: "#b6f3ff" }}>
       <MapContainer
-        center={[50, 10]}
+        center={[60, 20]}
         zoom={4}
         minZoom={3}
         maxZoom={10}

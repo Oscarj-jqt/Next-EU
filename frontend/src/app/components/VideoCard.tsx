@@ -303,6 +303,11 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
               type="text"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleAddComment(); // 🔥 Envoie le commentaire avec Entrée
+                }
+              }}
               placeholder="Ajouter un commentaire..."
               style={{
                 flex: 1,
