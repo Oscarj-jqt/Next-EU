@@ -46,7 +46,7 @@ class SaveVideoRequest
         public ?string $googleMapsUrl = null,
 
         #[Assert\NotBlank(message: 'Video ID is required')]
-        public ?int $id = null, // Pour la mise à jour d'une vidéo existante
+        public ?int $id = null,
     ) {
     }
 

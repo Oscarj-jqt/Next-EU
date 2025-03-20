@@ -17,7 +17,6 @@ class VideoService
         $this->entityManager = $entityManager;
     }
 
-    // Method to get videos
     public function getVideos(GetVideosRequest $request): array
     {
         $qb = $this->entityManager->getRepository(Video::class)->createQueryBuilder('v');
@@ -40,7 +39,6 @@ class VideoService
         return $qb->getQuery()->getResult();
     }
 
-    // Method to create a video with dto
     public function createVideo(CreateVideoRequest $request, User $user): Video
     {
         $video = new Video();
@@ -59,7 +57,6 @@ class VideoService
         return $video;
     }
 
-    // Method to save videos
     public function saveVideos(array $videoData): array
     {
         $savedVideos = [];
