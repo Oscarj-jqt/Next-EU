@@ -3,6 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import Link from "next/link"; 
 import { FaTimes, FaRedo, FaStop, FaPaperPlane, FaVideo } from "react-icons/fa"; 
 
+
 const CameraRecorder = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -142,12 +143,17 @@ const CameraRecorder = () => {
             >
               <FaRedo />
             </button>
+            <Link href="/home">
+
+         
             <button
               onClick={uploadVideo}
               className="px-6 py-3 text-white text-3xl"
             >
               <FaPaperPlane />
             </button>
+            </Link>
+            
           </div>
         </div>
       )}
