@@ -1,0 +1,14 @@
+[
+    {
+      "url": "../public/videos/video1.mp4",
+      "description": "Vidéo 1 - Démo"
+    },
+    {
+      "url": "/videos/video2.mp4",
+      "description": "Vidéo 2 - Exemple"
+    },
+    {
+      "url": "/videos/video3.mp4",
+      "description": "Vidéo 3 - Test"
+    }
+  ]
