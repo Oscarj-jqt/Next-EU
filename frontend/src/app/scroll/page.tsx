@@ -12,8 +12,16 @@ const videosByCountry: Record<string, { url: string; description: string }[]> = 
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742468006/azbss9nfivswkkry1ols.mp4", description: "" },
       ],
       Germany: [
-        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742460846/qdlo6xpupg4qmhiascrb.mp4", description: "Vidéo Allemagne 1" },
-        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742462133/xyimkjyqb6hbw2ajapxj.mp4", description: "Vidéo Allemagne 2" }
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742481441/ajkbdlfswded3brpzwtn.mp4", description: "Vidéo Allemagne 1" },
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742481441/ajkbdlfswded3brpzwtn.mp4", description: "Vidéo Allemagne 2" }
+      ],
+      Spain: [
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742480113/dfmsvpuds1rz07re0yue.mp4", description: "Vidéo Allemagne 1" },
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742480113/dfmsvpuds1rz07re0yue.mp4", description: "Vidéo Allemagne 2" }
+      ],
+      Sweden: [
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742480781/fmn5k3wdqxvbskccjrip.mp4", description: "Vidéo Allemagne 1" },
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742480781/fmn5k3wdqxvbskccjrip.mp4", description: "Vidéo Allemagne 2" }
       ],
       Cyprus: [
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742460660/rraol09ebldmsmztygfa.mp4", description: "Vidéo Chypre 1" },
