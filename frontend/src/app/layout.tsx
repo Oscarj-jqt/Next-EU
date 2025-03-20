@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import NotificationPopup from "./components/NotificationsPopup"; // Import du composant de notification
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,10 +25,11 @@ export default function Layout({
 }>) {
   return (
     <html lang="fr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* Affichage de la notification */}
+        <NotificationPopup />
+
+        {/* Le contenu principal */}
         <main style={{ display: "flex", justifyContent: "center" }}>
           {children}
         </main>
