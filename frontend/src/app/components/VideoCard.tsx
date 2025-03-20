@@ -22,46 +22,17 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive }) => {
   }, [isActive]);
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "393px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        scrollSnapAlign: "start",
-        position: "relative",
-        backgroundColor: "black",
-      }}
-    >
-      <video
-        ref={videoRef}
-        src={video.url}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
+    <div className="relative flex items-center justify-center h-screen w-[393px] snap-start bg-black">
+      <video ref={videoRef} src={video.url}
+        className="w-full h-full object-cover rounded-lg"
         loop
         muted
         playsInline
-        autoPlay={isActive} // Lecture automatique seulement si active
+        autoPlay={isActive} // Lecture automatique seulement si actif
       />
 
-      <div
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "20px",
-          color: "white",
-          fontSize: "18px",
-          fontWeight: "bold",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          padding: "8px",
-          borderRadius: "5px",
-        }}
-      >
+      {/* Texte Description */}
+      <div className="absolute bottom-5 left-5 bg-black/50 text-white text-lg font-bold p-2 rounded-md">
         {video.description}
       </div>
     </div>

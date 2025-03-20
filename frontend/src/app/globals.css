@@ -35,3 +35,18 @@ body {
   transform: scale(1.01);
   transition: transform 0.2s ease-in-out;
 }
+
+/* Supprime la scrollbar sur Chrome, Safari */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Supprime la scrollbar sur Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Supprime la scrollbar sur Edge et IE */
+.no-scrollbar {
+  -ms-overflow-style: none;
+}

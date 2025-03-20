@@ -14,6 +14,8 @@ const Scroll: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const scrollSpeed = 2;
+
   useEffect(() => {
     const handleScroll = () => {
       if (containerRef.current) {
@@ -27,18 +29,12 @@ const Scroll: React.FC = () => {
     container?.addEventListener("scroll", handleScroll);
     return () => container?.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        height: "100vh",
-        width: "393px",
-        overflowY: "scroll",
-        scrollSnapType: "y mandatory",
-        margin: "0 auto",
-        backgroundColor: "black",
-      }}
+    <div 
+      ref={containerRef} 
+      className="h-screen w-[393px] overflow-y-auto snap-y snap-mandatory mx-auto bg-black no-scrollbar"
     >
       {videos.map((video, index) => (
         <VideoCard key={index} video={video} isActive={index === activeIndex} />
