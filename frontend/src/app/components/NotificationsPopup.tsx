@@ -22,8 +22,7 @@ const NotificationPopup: React.FC = () => {
     <div
       className={`fixed inset-0 flex items-center justify-center transition-all duration-300 ${
         isVisible ? "opacity-100 pointer-events-auto backdrop-blur-md" : "opacity-0 pointer-events-none hidden"
-      }`}
-      style={{ zIndex: 50 }} // S'assurer qu'il est en premier plan
+      } z-[100]`} // Ajout de z-[100] pour garantir qu'il soit au premier plan
     >
       <div className="relative w-[300px] p-4 bg-white text-black rounded-lg shadow-lg">
         {/* Bouton de fermeture */}

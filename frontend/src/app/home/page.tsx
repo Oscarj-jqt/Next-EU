@@ -13,7 +13,7 @@ const Home: React.FC = () => {
     <div className="flex flex-col items-center justify-center w-full h-screen bg-black z-0">
       <Header />
 
-      <div className="w-[393px] h-[750px] overflow-hidden">
+      <div className="w-[393px] h-[750px] overflow-hidden relative z-10">
         <EuropeMap />
       </div>
 
