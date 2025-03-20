@@ -1,6 +1,7 @@
 "use client";
 
 import { MagnifyingGlassIcon, UserIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -16,7 +17,9 @@ const Header = () => {
           placeholder="Countries..."
         />
       </div>
-        <a href="/login"><UserIcon className="h-6 w-6 text-gray-600" /></a>
+      <Link href="/login">
+        <UserIcon className="h-6 w-6 text-gray-600" />
+      </Link>
     </nav>
   );
 };
