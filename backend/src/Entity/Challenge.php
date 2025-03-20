@@ -24,16 +24,29 @@ class Challenge
     /**
      * @var Collection<int, Video>
      */
-    #[ORM\ManyToOne(targetEntity: Video::class, inversedBy: 'challenge')]
+    #[ORM\OneToMany(targetEntity: Video::class, mappedBy: 'challenge', cascade: ['persist', 'remove'])]
     private Collection $videosOfChallenge;
+
+    #[ORM\Column]
+    private \DateTimeImmutable $validUntil;
 
     #[ORM\Column]
     private \DateTimeImmutable $createdAt;
 
-    public function __construct()
-    {
+    /**
+     * @param Collection<int, Video>|null $videosOfChallenge
+     */
+    public function __construct(
+        string $title,
+        string $description,
+        \DateTimeImmutable $validUntil,
+        ?Collection $videosOfChallenge = null,
+    ) {
+        $this->title = $title;
+        $this->description = $description;
+        $this->validUntil = $validUntil;
         $this->createdAt = new \DateTimeImmutable();
-        $this->videosOfChallenge = new ArrayCollection();
+        $this->videosOfChallenge = $videosOfChallenge ?? new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -86,6 +99,18 @@ class Challenge
     public function setVideosOfChallenge(Collection $videosOfChallenge): static
     {
         $this->videosOfChallenge = $videosOfChallenge;
+
+        return $this;
+    }
+
+    public function getValidUntil(): \DateTimeImmutable
+    {
+        return $this->validUntil;
+    }
+
+    public function setValidUntil(\DateTimeImmutable $validUntil): static
+    {
+        $this->validUntil = $validUntil;
 
         return $this;
     }

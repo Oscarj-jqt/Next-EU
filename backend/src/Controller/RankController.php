@@ -21,7 +21,7 @@ class RankController extends AbstractController
     }
 
     #[Route('/api/get-rank', name: 'getRank', methods: ['GET'])]
-    public function register(Request $request, ValidatorInterface $validator, EntityManagerInterface $entityManager): JsonResponse
+    public function register(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 

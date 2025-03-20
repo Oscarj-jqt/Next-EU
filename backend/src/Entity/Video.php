@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\VideoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,9 +17,6 @@ class Video
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $videoUrl;
-
-    #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
 
     // Relation with User entity
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'uploadedVideos')]
@@ -34,6 +32,21 @@ class Video
 
     #[ORM\ManyToOne(targetEntity: Challenge::class, inversedBy: 'videosOfChallenge')]
     private Challenge $challenge;
+
+    #[ORM\Column]
+    private \DateTimeImmutable $createdAt;
+
+    public function __construct(
+        string $videoUrl,
+        User $user,
+        Challenge $challenge,
+    ) {
+        $this->ratedByUsers = new ArrayCollection();
+        $this->videoUrl = $videoUrl;
+        $this->user = $user;
+        $this->challenge = $challenge;
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): int
     {
@@ -69,12 +82,6 @@ class Video
         $this->createdAt = $createdAt;
 
         return $this;
-    }
-
-    #[ORM\PrePersist]
-    public function setCreatedAtValue(): void
-    {
-        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getUser(): User

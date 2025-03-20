@@ -15,8 +15,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+    }
+
     #[Route('/api/create-user', name: 'user_register', methods: ['POST'])]
-    public function register(Request $request, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): JsonResponse
+    public function register(Request $request, ValidatorInterface $validator, UserPasswordHasherInterface $passwordHasher): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
@@ -30,7 +35,7 @@ class RegistrationController extends AbstractController
             return new JsonResponse(JsonResponse::HTTP_BAD_REQUEST);
         }
 
-        $existingUser = $entityManager->getRepository(User::class)->findOneBy(['username' => $createUserRequest->getUsername()]);
+        $existingUser = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $createUserRequest->getUsername()]);
         if ($existingUser) {
             return new JsonResponse(['error' => 'Username already taken'], JsonResponse::HTTP_CONFLICT);
         }
@@ -45,8 +50,8 @@ class RegistrationController extends AbstractController
         $user->setPassword($hashedPassword);
 
         // saving to database
-        $entityManager->persist($user);
-        $entityManager->flush();
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
 
         return new JsonResponse([
             'message' => 'User registered successfully',

@@ -6,6 +6,7 @@ use App\Dto\CreateVideoRequest;
 use App\Dto\GetVideosRequest;
 use App\Entity\User;
 use App\Entity\Video;
+use App\Rule\GetCurrentActiveChallengeRule;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,8 +16,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class VideoController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly GetCurrentActiveChallengeRule $getCurrentActiveChallengeRule,
+    ) {
     }
 
     #[Route('/api/create-video', name: 'createVideo', methods: ['POST'])]
@@ -50,13 +53,18 @@ class VideoController extends AbstractController
             );
         }
 
-        // Create Video entity
-        $video = new Video();
-        $video->setUser($user);
-        $video->setVideoUrl($createVideoRequest->getVideoUrl());
-        $video->setCreatedAt(new \DateTimeImmutable());
+        $currentActiveChallenge = $this->getCurrentActiveChallengeRule->applies();
 
-        // Persist to the database
+        if (!$currentActiveChallenge) {
+            return new JsonResponse(status: JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        $video = new Video(
+            videoUrl: $createVideoRequest->getVideoUrl(),
+            user: $user,
+            challenge: $currentActiveChallenge,
+        );
+
         $this->entityManager->persist($video);
         $this->entityManager->flush();
 
