@@ -7,12 +7,15 @@ import VideoCard from "../components/VideoCard";
 const videosByCountry: Record<string, { url: string; description: string }[]> = {
     France: [
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742467989/ttf7mbibjryoa4hgethl.mp4", description: "" },
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742488577/uv4adlbdqf3emeei1wtx.mp4", description: "" },
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742468006/cqvthfzbblfpjqf63g3a.mp4", description: "" },
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742467981/ogdjza2pbyuvwu5t0ykn.mp4", description: "" },
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742468006/azbss9nfivswkkry1ols.mp4", description: "" },
+        
       ],
       Germany: [
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742481441/ajkbdlfswded3brpzwtn.mp4", description: "Vidéo Allemagne 1" },
+        { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742488231/dienlkgc73yiswctfweo.mp4", description: "Vidéo Allemagne 1" },
         { url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742481441/ajkbdlfswded3brpzwtn.mp4", description: "Vidéo Allemagne 2" }
       ],
       Spain: [

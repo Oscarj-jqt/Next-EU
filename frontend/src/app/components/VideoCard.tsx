@@ -11,6 +11,13 @@ interface VideoCardProps {
   likesCount: number;
   onLike: () => void;
 }
+const challenges = [
+    "💪 Défi Sport : Make a video showing your best backflip !",
+  ];
+  const getDailyChallenge = () => {
+    const today = new Date().getDate(); // Récupère le jour du mois (1-31)
+    return challenges[today % challenges.length]; // Alterne selon le jour
+  };
 
 const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCount, onLike }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -101,6 +108,30 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, isActive, isLiked, likesCo
     zIndex: 999,
       }}
     >
+    <div
+  style={{
+    position : "absolute",
+    marginLeft : "350px",
+    width: "250px", // ✅ Largeur complète
+    height : "8vh",
+    backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond semi-transparent
+    color: "white",
+     // Espacement vertical
+    fontSize: "16px",
+    fontWeight: "bold",
+    textAlign: "center",
+    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.4)", // Ombre subtile
+    borderBottomLeftRadius: "10px", // Coins arrondis en bas
+    borderBottomRightRadius: "10px",
+    borderTopLeftRadius : "10px",
+    borderTopRightRadius : "10px",
+    display : "flex",
+    justifyContent : "center",
+    
+  }}
+>
+  {getDailyChallenge()}
+</div>
       <FaArrowLeft size={20} />
     </button>
       <video
