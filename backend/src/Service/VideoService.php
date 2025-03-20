@@ -50,7 +50,6 @@ class VideoService
             ->setThumbnail($request->getThumbnail())
             ->setUser($user);
 
-        // Saving new video in the database
         $this->entityManager->persist($video);
         $this->entityManager->flush();
 
@@ -69,6 +68,7 @@ class VideoService
                 ->setVideoUrl($data['videoUrl'])
                 ->setDescription($data['description'])
                 ->setThumbnail($data['thumbnail'] ?? null);
+
 
             $this->entityManager->persist($video);
             $savedVideos[] = $video;
