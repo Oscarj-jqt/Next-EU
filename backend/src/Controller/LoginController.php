@@ -9,6 +9,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class LoginController extends AbstractController
 {
@@ -18,7 +20,6 @@ class LoginController extends AbstractController
 
     #[Route('/login', name: 'user_login', methods: ['POST'])]
     public function login(Request $request, UserPasswordHasherInterface $passwordEncoder): JsonResponse
-
     {
         $data = json_decode($request->getContent(), true);
         $username = $data['username'] ?? null;
@@ -41,7 +42,6 @@ class LoginController extends AbstractController
         if (!$passwordEncoder->isPasswordValid($user, $password)) {
             return new JsonResponse(['error' => 'Invalid password'], JsonResponse::HTTP_UNAUTHORIZED);
         }
-
 
         // Create the token for user
         $username = $user->getUsername();

@@ -27,7 +27,7 @@ class GetVideosRequest
         public ?string $title = null,
 
         public ?\DateTimeImmutable $createdAtFrom = null,
-        public ?\DateTimeImmutable $createdAtTo = null
+        public ?\DateTimeImmutable $createdAtTo = null,
     ) {
     }
 

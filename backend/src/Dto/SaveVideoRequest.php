@@ -6,7 +6,7 @@ use App\Enum\CategoryEnum;
 use App\Enum\CountryEnum;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class CreateVideoRequest
+class SaveVideoRequest
 {
     public function __construct(
         #[Assert\NotBlank(message: 'Video title is required')]
@@ -44,6 +44,9 @@ class CreateVideoRequest
 
         #[Assert\Url(message: 'Invalid Google Maps URL')]
         public ?string $googleMapsUrl = null,
+
+        #[Assert\NotBlank(message: 'Video ID is required')]
+        public ?int $id = null,
     ) {
     }
 
@@ -85,5 +88,10 @@ class CreateVideoRequest
     public function getGoogleMapsUrl(): ?string
     {
         return $this->googleMapsUrl;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 }
