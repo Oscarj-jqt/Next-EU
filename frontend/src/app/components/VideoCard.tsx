@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   FaHeart,
   FaCommentDots,
@@ -9,7 +10,9 @@ import {
   FaWhatsapp,
   FaTwitter,
   FaSnapchatGhost,
+  FaArrowLeft,
 } from "react-icons/fa";
+import { CSSProperties } from "react";
 
 interface VideoCardProps {
   video: { url: string; description: string };
@@ -18,6 +21,13 @@ interface VideoCardProps {
   likesCount: number;
   onLike: () => void;
 }
+const challenges = [
+  "💪 Défi Sport : Make a video showing your best backflip !",
+];
+const getDailyChallenge = () => {
+  const today = new Date().getDate(); // Récupère le jour du mois (1-31)
+  return challenges[today % challenges.length]; // Alterne selon le jour
+};
 
 const VideoCard: React.FC<VideoCardProps> = ({
   video,
@@ -31,6 +41,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
   const [newComment, setNewComment] = useState("");
+  const router = useRouter();
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(video.url);
@@ -58,8 +69,75 @@ const VideoCard: React.FC<VideoCardProps> = ({
     }
   };
 
+  // Fermer les commentaires en cliquant à l'extérieur
+  const handleOutsideClick = (e: React.MouseEvent) => {
+    if (showComments) {
+      const commentSection = document.getElementById("comment-section");
+      if (commentSection && !commentSection.contains(e.target as Node)) {
+        setShowComments(false);
+      }
+    }
+  };
+
   return (
-    <div className="relative flex items-center justify-center h-screen w-[393px] snap-start bg-black">
+    <div
+      style={{
+        height: "100vh",
+        width: "393px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        scrollSnapAlign: "start",
+        position: "relative",
+        backgroundColor: "black",
+      }}
+      onClick={handleOutsideClick} // Ferme les commentaires en cliquant ailleurs
+    >
+      <button
+        onClick={() => router.push("/")} // Redirige vers la page d'accueil
+        style={{
+          position: "absolute",
+          top: "20px",
+          left: "20px",
+          backgroundColor: "rgba(0,0,0,0.5)", // Fond semi-transparent
+          color: "white",
+          border: "none",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          cursor: "pointer",
+          boxShadow: "2px 2px 6px rgba(0, 0, 0, 0.6)",
+          zIndex: 999,
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            marginLeft: "350px",
+            width: "250px", // ✅ Largeur complète
+            height: "8vh",
+            backgroundColor: "rgba(0, 0, 0, 0.7)", // Fond semi-transparent
+            color: "white",
+            // Espacement vertical
+            fontSize: "16px",
+            fontWeight: "bold",
+            textAlign: "center",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.4)", // Ombre subtile
+            borderBottomLeftRadius: "10px", // Coins arrondis en bas
+            borderBottomRightRadius: "10px",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {getDailyChallenge()}
+        </div>
+        <FaArrowLeft size={20} />
+      </button>
       <video
         ref={videoRef}
         src={video.url}
@@ -302,6 +380,11 @@ const VideoCard: React.FC<VideoCardProps> = ({
               type="text"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleAddComment(); // 🔥 Envoie le commentaire avec Entrée
+                }
+              }}
               placeholder="Ajouter un commentaire..."
               style={{
                 flex: 1,
@@ -333,7 +416,7 @@ const VideoCard: React.FC<VideoCardProps> = ({
     </div>
   );
 };
-const buttonStyle = {
+const buttonStyle: CSSProperties = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",

@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./home/page";
 import Header from "./components/header"; // Assurez-vous que le Header est ici
 
+export const dynamic = "force-dynamic";
+
 const App = () => {
   return (
     <Router>

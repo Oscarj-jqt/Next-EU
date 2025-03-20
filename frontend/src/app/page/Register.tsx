@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 
 export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  const handleRegister = async (e: Event) => {
+  const handleRegister = async (
+    e: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     e.preventDefault();
 
     if (username.length < 3) {
@@ -18,7 +20,7 @@ export default function Register() {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/create-user", {
+      const response = await fetch("/api/create-user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
