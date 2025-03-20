@@ -4,26 +4,26 @@ namespace App\Controller;
 
 use App\Dto\CreateVideoRequest;
 use App\Dto\GetVideosRequest;
-use App\Entity\User;
-use App\Entity\Video;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\VideoService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 
 class VideoController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
-    }
+    public function __construct(
+        private readonly VideoService $videoService,
+        private readonly EntityManagerInterface $entityManager
+    ) {}
 
     #[Route('/api/create-video', name: 'createVideo', methods: ['POST'])]
     public function create(Request $request, ValidatorInterface $validator): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
-
         $createVideoRequest = new CreateVideoRequest(
             title: $data['title'],
             category: $data['category'],
@@ -32,23 +32,19 @@ class VideoController extends AbstractController
             videoUrl: $data['videoUrl'],
             description: $data['description'],
             thumbnail: $data['thumbnail'] ?? null,
-            googleMapsUrl: $data['googleMapsUrl'] ?? null
         );
 
         // Validation
         $violations = $validator->validate($createVideoRequest);
         if (count($violations) > 0) {
             return new JsonResponse(
-                data: ['errors' => (string) $violations],
+                data: ['errors' => (string)$violations],
                 status: JsonResponse::HTTP_BAD_REQUEST
             );
         }
 
         // Retrieve the user
-        $user = $this->entityManager
-            ->getRepository(User::class)
-            ->find($createVideoRequest->getUserId());
-
+        $user = $this->getDoctrine()->getRepository(User::class)->find($createVideoRequest->getUserId());
         if (!$user) {
             return new JsonResponse(
                 data: ['message' => 'User not found'],
@@ -56,25 +52,26 @@ class VideoController extends AbstractController
             );
         }
 
-        // Create Video entity
-        $video = new Video();
-        $video->setTitle($createVideoRequest->getTitle());
-        $video->setDescription($createVideoRequest->getDescription());
-        $video->setCategory($createVideoRequest->getCategory()->value);
-        $video->setCountry($createVideoRequest->getCountry()->value);
-        $video->setUser($user);
-        $video->setVideoUrl($createVideoRequest->getVideoUrl());
-        $video->setThumbnail($createVideoRequest->getThumbnail());
-        $video->setGoogleMapsUrl($createVideoRequest->getGoogleMapsUrl());
-        $video->setCreatedAt(new \DateTimeImmutable());
-
-        // Persist to the database
-        $this->entityManager->persist($video);
-        $this->entityManager->flush();
+        // Create video
+        $video = $this->videoService->createVideo($createVideoRequest, $user);
 
         return new JsonResponse(
-            data: ['message' => 'Video created successfully'],
+            data: ['message' => 'Video created successfully', 'videoId' => $video->getId()],
             status: JsonResponse::HTTP_CREATED
+        );
+    }
+
+    #[Route('/api/save-videos', name: 'saveVideos', methods: ['POST'])]
+    public function saveVideos(Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+        $videoData = $data['videos']; // Expecting an array of videos
+
+        $savedVideos = $this->videoService->saveVideos($videoData);
+
+        return new JsonResponse(
+            data: ['message' => 'Videos saved successfully', 'savedVideos' => $savedVideos],
+            status: JsonResponse::HTTP_OK
         );
     }
 
@@ -83,43 +80,43 @@ class VideoController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
+        // Creating the GetVideosRequest object from the incoming data
         $getVideosRequest = new GetVideosRequest(
             category: $data['category'],
             country: $data['country'],
-            userId: $data['userId']
+            userId: $data['userId'] ?? null
         );
 
         // Validation
         $violations = $validator->validate($getVideosRequest);
         if (count($violations) > 0) {
             return new JsonResponse(
-                data: ['errors' => (string) $violations],
+                data: ['errors' => (string)$violations],
                 status: JsonResponse::HTTP_BAD_REQUEST
             );
         }
 
-        // Retrieve user
+        // Retrieve user if userId is provided
         $user = null;
         if ($getVideosRequest->getUserId()) {
             $user = $this->entityManager
-            ->getRepository(User::class)
-            ->find($getVideosRequest->getUserId());
+                ->getRepository(User::class)
+                ->find($getVideosRequest->getUserId());
         }
 
-        // Get videos
+        // Get videos based on category and country (you can modify this if needed)
         $videos = $this->entityManager
-        ->getRepository(Video::class)
-        ->findBy(
-            [
-                'category' => $getVideosRequest->getCategory(),
-                'country' => $getVideosRequest->getCountry(),
-            ],
-            ['createdAt' => 'DESC'],
-            // We get max 2 videos
-            2
-        );
+            ->getRepository(Video::class)
+            ->findBy(
+                [
+                    'category' => $getVideosRequest->getCategory(),
+                    'country' => $getVideosRequest->getCountry(),
+                ],
+                ['createdAt' => 'DESC'],
+                //The limit we display
+                10
+            );
 
-        // Prepare result
         $result = array_map(function (Video $video) use ($user) {
             return [
                 'id' => $video->getId(),
@@ -130,7 +127,6 @@ class VideoController extends AbstractController
                 'isFromCurrentUser' => $user && $video->getUser() === $user,
                 'videoUrl' => $video->getVideoUrl(),
                 'thumbnail' => $video->getThumbnail(),
-                'googleMapsUrl' => $video->getGoogleMapsUrl(),
                 'createdAt' => $video->getCreatedAt()->format('Y-m-d H:i:s'),
             ];
         }, $videos);
