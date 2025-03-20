@@ -3,9 +3,9 @@ POST http://localhost:8080/api/create-user
 Content-Type: application/json
 
 {
-  "username": "Maxi",
-  "email": "maxi@test.de",
-  "password": "123456"
+  "username": "Maxi2",
+  "country": "germany",
+  "password": "12345678"
 }
 
 > {%

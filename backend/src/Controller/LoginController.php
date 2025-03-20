@@ -47,6 +47,6 @@ class LoginController extends AbstractController
         return new JsonResponse([
             'message' => 'Logged successfully',
             'username' => $username,
-        ], JsonResponse::HTTP_OK);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

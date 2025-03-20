@@ -16,7 +16,6 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // Données fictives pour les utilisateurs
         $usersData = [
             [
                 'username' => 'Leander',
@@ -35,7 +34,7 @@ class UserFixtures extends Fixture
         foreach ($usersData as $userData) {
             $user = new User();
             $user->setUsername($userData['username']);
-            $user->setCountry($userData['country']);
+            $user->setCountry(CountryEnum::from($userData['country']));
             $user->setProfilePicture($userData['profilePicture']);
             $user->setCreatedAt(new \DateTimeImmutable());
 
@@ -45,7 +44,6 @@ class UserFixtures extends Fixture
             $manager->persist($user);
         }
 
-        // Saving new users in database
         $manager->flush();
     }
 }

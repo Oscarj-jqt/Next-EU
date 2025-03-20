@@ -1,11 +1,11 @@
-### Get all messages of a category and country
-GET http://localhost:8080/api/get-messages
+### Create a new challenge
+POST http://localhost:8080/api/create-challenge
 Content-Type: application/json
 
 {
-  "userId": 1,
-  "category": "sports",
-  "country": "france"
+  "validUntil": "2025-03-21 00:00",
+  "title": "Bottleflip challenge",
+  "description": "Do 3 Bottlefilps in a row"
 }
 
 > {%

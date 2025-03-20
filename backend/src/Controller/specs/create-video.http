@@ -1,12 +1,10 @@
-### Create a new message
-POST http://localhost:8080/api/create-message
+### Create a new video
+POST http://localhost:8080/api/create-video
 Content-Type: application/json
 
 {
   "userId": 1,
-  "category": "sports",
-  "country": "france",
-  "content": "123456"
+  "videoUrl": "https://www.google.com"
 }
 
 > {%
