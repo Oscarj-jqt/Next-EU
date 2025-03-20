@@ -14,18 +14,14 @@ export default function Register() {
             className="mb-4 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-black "
           />
 
-          <label className="mb-1 text-gray-600 font-medium">Full name</label>
+      
           {/* <input 
             type="text" 
             placeholder="Full name"
             className="mb-4 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-black "
           />
           <label className="mb-1 text-gray-600 font-medium">Email</label> */}
-          <input 
-            type="email" 
-            placeholder="example@test.com"
-            className="mb-4 p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-black "
-          />
+         
 
           <label className="mb-1 text-gray-600 font-medium">Password</label>
           <input 
