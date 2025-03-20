@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   FaHeart,
   FaCommentDots,
@@ -32,7 +31,6 @@ const VideoCard: React.FC<VideoCardProps> = ({
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
   const [newComment, setNewComment] = useState("");
-  const router = useRouter();
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(video.url);
@@ -57,28 +55,6 @@ const VideoCard: React.FC<VideoCardProps> = ({
     if (newComment.trim() !== "") {
       setComments([...comments, newComment]);
       setNewComment("");
-    }
-  };
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(video.url);
-    alert("✅ Lien copié !");
-  };
-
-  // 📌 Générer les liens de partage
-  const shareLinks = {
-    whatsapp: `https://api.whatsapp.com/send?text=Regarde cette vidéo ! ${video.url}`,
-    twitter: `https://twitter.com/intent/tweet?url=${video.url}&text=Regarde cette vidéo !`,
-    snapchat: `https://www.snapchat.com/scan?attachmentUrl=${video.url}`,
-  };
-
-  // Fermer les commentaires en cliquant à l'extérieur
-  const handleOutsideClick = (e: React.MouseEvent) => {
-    if (showComments) {
-      const commentSection = document.getElementById("comment-section");
-      if (commentSection && !commentSection.contains(e.target as Node)) {
-        setShowComments(false);
-      }
     }
   };
 

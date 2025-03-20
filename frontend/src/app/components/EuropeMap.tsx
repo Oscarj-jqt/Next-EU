@@ -14,6 +14,7 @@ const europeBounds = [
 const EuropeMap: React.FC = () => {
   const router = useRouter();
 
+  // eslint-disable-next-line
   const onEachCountry = (feature: any, layer: any) => {
     layer.setStyle({
       fillColor: "#004080",

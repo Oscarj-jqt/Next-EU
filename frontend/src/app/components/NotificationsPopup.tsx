@@ -39,7 +39,7 @@ const NotificationPopup: React.FC = () => {
         </button>
 
         <h4 className="font-bold">Notification</h4>
-        <p>It's time to do the challenge!</p>
+        <p>It&#39;s time to do the challenge!</p>
 
         {/* Bouton pour naviguer et fermer */}
         <Link href="/publish">

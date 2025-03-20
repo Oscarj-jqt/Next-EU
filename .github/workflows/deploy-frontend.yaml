@@ -23,12 +23,12 @@ jobs:
         run: docker build --platform linux/amd64 -t frontend -f docker/production/frontend-production.Dockerfile .
 
       - name: Tag Docker image
-        run: docker tag frontend registry.heroku.com/eu-talent/web
+        run: docker tag frontend registry.heroku.com/eu-talent-frontend/web
 
       - name: Push docker image
-        run: docker push registry.heroku.com/eu-talent/web
+        run: docker push registry.heroku.com/eu-talent-frontend/web
 
       - name: Release on Heroku
-        run: heroku container:release web --app eu-talent
+        run: heroku container:release web --app eu-talent-frontend
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
