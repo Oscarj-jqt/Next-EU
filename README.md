@@ -34,5 +34,5 @@ L'application est développée avec les technologies suivantes :
 
 ### 📥 1. Cloner le dépôt
 ```bash
-git clone lien_du_dépôt
+git clone https://github.com/Oscarj-jqt/eu-talent
 cd eu-talent
