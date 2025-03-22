@@ -5,6 +5,14 @@ L'application permet aux utilisateurs **connectés** de parcourir une carte inte
 
 ![Aperçu de l'application](chemin/vers/image.png)
 
+## ✨ Fonctionnalités principales
+- 📌 **Carte interactive** de l'Europe permettant de sélectionner un pays.
+- 🎥 **Visionnage de vidéos** liées aux talents des ressortissants de chaque pays.
+- 📤 **Ajout de vidéos** par les utilisateurs connectés pour contribuer à la plateforme.
+- 🔐 **Authentification sécurisée** via JWT (connexion et inscription).
+- 📊 **Stockage des vidéos** et gestion des données en base de données MySQL.
+
+
 ## 🛠️ Technologies utilisées
 
 L'application est développée avec les technologies suivantes :
@@ -21,12 +29,6 @@ L'application est développée avec les technologies suivantes :
 - **React** pour construire l'interface utilisateur interactive.
 - **API Fetch** pour la communication avec le backend.
 
-## ✨ Fonctionnalités principales
-- 📌 **Carte interactive** de l'Europe permettant de sélectionner un pays.
-- 🎥 **Visionnage de vidéos** liées aux talents des ressortissants de chaque pays.
-- 📤 **Ajout de vidéos** par les utilisateurs connectés pour contribuer à la plateforme.
-- 🔐 **Authentification sécurisée** via JWT (connexion et inscription).
-- 📊 **Stockage des vidéos** et gestion des données en base de données MySQL.
 
 ## 🚀 Installation et exécution du projet
 
