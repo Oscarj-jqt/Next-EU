@@ -5,6 +5,8 @@ Une semaine de challenge durant laquelle des étudiants français (HETIC) et all
 Ce projet a été réalisé sur le thème choisi **"Les Talents d'Europe" (EU-Talent)**.  
 L'application NEXTEU permet aux utilisateurs **connectés** de parcourir une carte interactive de l'Europe, de découvrir des vidéos mettant en avant les talents des citoyens de chaque pays et d'ajouter leurs propres contributions.
 
+##  Aperçu de l'application
+
 ![Aperçu de l'application](/nexteu_cap.PNG)
 
 ##  Fonctionnalités principales
