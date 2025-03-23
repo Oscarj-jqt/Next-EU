@@ -2,7 +2,7 @@
 
 Une semaine de challenge durant laquelle des étudiants français (HETIC) et allemands (Macromedia) développent ensemble des applications numériques sur la base des projets lauréats de l’édition 2023.
 
-sur le thème choisi **"Les Talents d'Europe" (EU-Talent)**.  
+Ce projet a été réalisé sur le thème choisi **"Les Talents d'Europe" (EU-Talent)**.  
 L'application permet aux utilisateurs **connectés** de parcourir une carte interactive de l'Europe, de découvrir des vidéos mettant en avant les talents des citoyens de chaque pays et d'ajouter leurs propres contributions.
 
 ![Aperçu de l'application](chemin/vers/image.png)
