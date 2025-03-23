@@ -1,4 +1,4 @@
-# 🇪🇺 Hackathon pour l’Europe - Edition 2025
+# Hackathon pour l’Europe - Edition 2025
 
 Une semaine de challenge durant laquelle des étudiants français (HETIC) et allemands (Macromedia) développent ensemble des applications numériques sur la base des projets lauréats de l’édition 2023.
 
