@@ -38,3 +38,13 @@ L'application est développée avec les technologies suivantes :
 ```bash
 git clone https://github.com/Oscarj-jqt/eu-talent
 cd eu-talent
+```
+
+## Développeurs
+
+ - Oscar JACQUET    - Développeur Back End
+ - Leander Cain Slotosch - Développeur Back End
+ - Alexis HU        - Développeur Front End
+ - Issa Abdoulaye  - Développeur Front End
+ - Aryles Ben Chabane - Développeur Front End
+ - Hugo Da Rocha    - Développeur Front End
