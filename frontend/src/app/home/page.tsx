@@ -2,13 +2,10 @@
 
 import React from "react";
 import EuropeMap from "../components/EuropeMap";
-import { useRouter } from "next/navigation";
 import Header from "../components/header";
 import NotificationPopup from "../components/NotificationsPopup"; // Assure-toi que l'importation est correcte
 
 const Home: React.FC = () => {
-  const router = useRouter();
-
   return (
     <div className="flex flex-col items-center justify-center w-full h-screen bg-black z-0">
       <Header />

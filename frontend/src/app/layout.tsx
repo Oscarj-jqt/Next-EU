@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NotificationPopup from "./components/NotificationsPopup"; // Import du composant de notification
 
+export const dynamic = "force-dynamic";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -24,18 +26,14 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Affichage de la notification */}
-        <NotificationPopup />
+    <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      {/* Affichage de la notification */}
+      <NotificationPopup />
 
-        {/* Le contenu principal */}
-        <main style={{ display: "flex", justifyContent: "center" }}>
-          {children}
-        </main>
-      </body>
-    </html>
+      {/* Le contenu principal */}
+      <main style={{ display: "flex", justifyContent: "center" }}>
+        {children}
+      </main>
+    </div>
   );
 }

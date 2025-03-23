@@ -1,14 +1,20 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect, useRef, RefObject } from "react";
+import { ReadonlyURLSearchParams, useSearchParams } from "next/navigation";
 import VideoCard from "../components/VideoCard";
+
+export const dynamic = "force-dynamic";
 
 const videosByCountry: Record<string, { url: string; description: string }[]> =
   {
     France: [
       {
         url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742467989/ttf7mbibjryoa4hgethl.mp4",
+        description: "",
+      },
+      {
+        url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742488577/uv4adlbdqf3emeei1wtx.mp4",
         description: "",
       },
       {
@@ -27,6 +33,10 @@ const videosByCountry: Record<string, { url: string; description: string }[]> =
     Germany: [
       {
         url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742481441/ajkbdlfswded3brpzwtn.mp4",
+        description: "Vidéo Allemagne 1",
+      },
+      {
+        url: "https://res.cloudinary.com/dyhcikuhl/video/upload/v1742488231/dienlkgc73yiswctfweo.mp4",
         description: "Vidéo Allemagne 1",
       },
       {
@@ -77,11 +87,13 @@ const videosByCountry: Record<string, { url: string; description: string }[]> =
       },
     ],
   };
+
 const Scroll: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const searchParams = useSearchParams();
-  const rawCountry = searchParams.get("country") || "France";
+  const containerRef: RefObject<HTMLDivElement | null> =
+    useRef<HTMLDivElement>(null);
+  const searchParams: ReadonlyURLSearchParams = useSearchParams();
+  const rawCountry: string = searchParams.get("country") ?? "";
 
   // 🔥 Normaliser le nom du pays (supprimer accents et espaces)
   const normalizeCountry = (name: string) => {
@@ -95,7 +107,7 @@ const Scroll: React.FC = () => {
     );
   };
 
-  const country = normalizeCountry(rawCountry);
+  const country: string = normalizeCountry(rawCountry);
 
   console.log("Pays sélectionné :", country);
   console.log("Pays disponibles :", Object.keys(videosByCountry));

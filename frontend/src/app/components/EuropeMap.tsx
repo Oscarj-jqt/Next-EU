@@ -5,16 +5,28 @@ import { useRouter } from "next/navigation";
 import { MapContainer, GeoJSON } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import europeGeoJson from "../data/europe.json";
+import { Feature, Geometry } from "geojson";
+import { LatLngTuple } from "leaflet";
+import { FeatureCollection } from "geojson";
 
-const europeBounds = [
-  [71.2, -25.0], // Nord-Ouest
-  [34.5, 45.0], // Sud-Est
+export const dynamic = "force-dynamic";
+
+const europeGeoJsonTyped = europeGeoJson as FeatureCollection;
+
+const europeBounds: [LatLngTuple, LatLngTuple] = [
+  [75.0, -30.0], // 🔼 Augmente au nord-ouest (plus haut et à gauche)
+  [30.0, 50.0], // 🔽 Augmente au sud-est (plus bas et à droite, inclut mieux Chypre)
 ];
 
 const EuropeMap: React.FC = () => {
   const router = useRouter();
 
-  const onEachCountry = (feature: any, layer: any) => {
+  const onEachCountry = (
+    feature: Feature<Geometry, { NAME?: string }>,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    layer,
+  ) => {
     layer.setStyle({
       fillColor: "#004080",
       color: "#FFFFFF",
@@ -55,7 +67,7 @@ const EuropeMap: React.FC = () => {
   return (
     <div style={{ width: "100%", height: "100%", backgroundColor: "#b6f3ff" }}>
       <MapContainer
-        center={[50, 10]}
+        center={[60, 20]}
         zoom={4}
         minZoom={3}
         maxZoom={10}
@@ -69,7 +81,7 @@ const EuropeMap: React.FC = () => {
         maxBoundsViscosity={1.0}
         attributionControl={false}
       >
-        <GeoJSON data={europeGeoJson} onEachFeature={onEachCountry} />
+        <GeoJSON data={europeGeoJsonTyped} onEachFeature={onEachCountry} />
       </MapContainer>
     </div>
   );
