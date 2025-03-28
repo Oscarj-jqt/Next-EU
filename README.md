@@ -42,9 +42,11 @@ git clone https://github.com/Oscarj-jqt/eu-talent
 cd eu-talent
 ```
 
-## Développeurs
+## Participants
 
- - Oscar JACQUET    - Développeur Back End
+ - Enes Kenar - Chef de projet
+ - Johannes Ilzhöfer - Designer
+ - Oscar Jacquet  - Développeur Back End
  - Leander Cain Slotosch - Développeur Back End
  - Alexis HU        - Développeur Front End
  - Issa Abdoulaye  - Développeur Front End
