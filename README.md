@@ -38,7 +38,7 @@ L'application est développée avec les technologies suivantes :
 
 ### 1. Cloner le dépôt
 ```bash
-git clone https://github.com/Oscarj-jqt/eu-talent
+git clone https://github.com/Oscarj-jqt/Next-EU
 cd eu-talent
 ```
 
